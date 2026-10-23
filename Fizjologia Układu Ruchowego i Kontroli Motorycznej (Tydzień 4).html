@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fizjologia Układu Ruchowego – Opracowanie Zagadnień (Tydzień 4)</title>
+  
+  <!-- MathJax dla renderowania symboli matematycznych i fizjologicznych LaTeX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    :root {
+      --primary: #0f2b48;
+      --primary-light: #1e4976;
+      --accent: #2563eb;
+      --accent-soft: #eff6ff;
+      --teal: #0d9488;
+      --teal-soft: #f0fdfa;
+      --amber: #d97706;
+      --amber-soft: #fffbeb;
+      --rose: #e11d48;
+      --rose-soft: #fff1f2;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --radius-lg: 14px;
+      --radius-md: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+      color: var(--gray-800);
+      background-color: #f4f6f9;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Układ główny z bocznym spisem treści */
+    .layout-container {
+      display: flex;
+      max-width: 1440px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+
+    /* Pasek nawigacji bocznej */
+    aside.sidebar {
+      width: 320px;
+      background: #ffffff;
+      border-right: 1px solid var(--gray-200);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 28px 20px;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    aside.sidebar h2 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray-700);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    aside.sidebar nav ul {
+      list-style: none;
+    }
+
+    aside.sidebar nav li {
+      margin-bottom: 6px;
+    }
+
+    aside.sidebar nav a {
+      display: block;
+      padding: 8px 12px;
+      font-size: 0.88rem;
+      color: var(--gray-700);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    aside.sidebar nav a:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding-left: 16px;
+    }
+
+    /* Główna treść */
+    main.content {
+      flex: 1;
+      padding: 40px 52px;
+      max-width: 1120px;
+      background: #ffffff;
+      margin: 16px 20px 24px 20px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+    }
+
+    /* Pasek akcji nagłówka */
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    .header-titles h1 {
+      font-size: 2.15rem;
+      color: var(--primary);
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .header-titles .subtitle {
+      font-size: 1.05rem;
+      color: var(--teal);
+      font-weight: 600;
+      margin-top: 6px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .print-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .print-button:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    /* Styl sekcji i kart */
+    section {
+      margin-bottom: 48px;
+    }
+
+    h2.section-title {
+      font-size: 1.5rem;
+      color: var(--primary);
+      font-weight: 700;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 8px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h3.subsection-title {
+      font-size: 1.2rem;
+      color: var(--primary-light);
+      font-weight: 600;
+      margin: 24px 0 12px 0;
+    }
+
+    p {
+      margin-bottom: 14px;
+      text-align: justify;
+    }
+
+    /* Boxy wyróżnień */
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin: 20px 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-clinical {
+      background: var(--rose-soft);
+      border-left: 5px solid var(--rose);
+      border-top: 1px solid #ffe4e6;
+      border-right: 1px solid #ffe4e6;
+      border-bottom: 1px solid #ffe4e6;
+    }
+
+    .card-clinical h4 {
+      color: var(--rose);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-key {
+      background: var(--accent-soft);
+      border-left: 5px solid var(--accent);
+      border-top: 1px solid #dbeafe;
+      border-right: 1px solid #dbeafe;
+      border-bottom: 1px solid #dbeafe;
+    }
+
+    .card-key h4 {
+      color: var(--accent);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-pearl {
+      background: var(--amber-soft);
+      border-left: 5px solid var(--amber);
+      border-top: 1px solid #fef3c7;
+      border-right: 1px solid #fef3c7;
+      border-bottom: 1px solid #fef3c7;
+    }
+
+    .card-pearl h4 {
+      color: var(--amber);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Tabele akademickie */
+    .table-container {
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      text-align: left;
+    }
+
+    th {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 16px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--gray-300);
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--gray-200);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--gray-50);
+    }
+
+    tr:hover {
+      background-color: #f1f5f9;
+    }
+
+    /* Listy */
+    ul, ol {
+      margin: 12px 0 16px 24px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    /* Schematy SVG */
+    .svg-wrapper {
+      background: #ffffff;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin: 24px 0;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .svg-wrapper svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .svg-caption {
+      font-size: 0.85rem;
+      color: var(--gray-700);
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    /* Interaktywny quiz */
+    .quiz-container {
+      background: #f8fafc;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin: 28px 0;
+    }
+
+    .quiz-question {
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .quiz-question:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .quiz-question p.q-text {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .quiz-options button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: #ffffff;
+      border: 1px solid var(--gray-300);
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quiz-options button:hover {
+      background: var(--gray-100);
+      border-color: var(--accent);
+    }
+
+    .quiz-feedback {
+      margin-top: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    .quiz-feedback.correct {
+      background: #dcfce7;
+      color: #15803d;
+      display: block;
+    }
+
+    .quiz-feedback.incorrect {
+      background: #fee2e2;
+      color: #b91c1c;
+      display: block;
+    }
+
+    /* Responsywność */
+    @media (max-width: 1024px) {
+      .layout-container {
+        flex-direction: column;
+      }
+      aside.sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid var(--gray-200);
+      }
+      main.content {
+        margin: 12px;
+        padding: 24px;
+      }
+    }
+
+    /* Ustawienia wydruku do PDF */
+    @media print {
+      body {
+        background: #ffffff;
+        color: #000000;
+        font-size: 10.5pt;
+      }
+      .layout-container {
+        display: block;
+        max-width: 100%;
+      }
+      aside.sidebar, .print-button, .quiz-container {
+        display: none !important;
+      }
+      main.content {
+        margin: 0;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        max-width: 100%;
+      }
+      h2.section-title {
+        page-break-before: auto;
+        page-break-after: avoid;
+        border-bottom: 1.5pt solid #0f2b48;
+      }
+      .card, .table-container, .svg-wrapper {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1pt solid #cbd5e1;
+      }
+      a {
+        text-decoration: none;
+        color: #000000;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="layout-container">
+  
+  <!-- Boczne Menu Nawigacyjne -->
+  <aside class="sidebar">
+    <h2>Spis Zagadnień (Tydzień 4)</h2>
+    <nav>
+      <ul>
+        <li><a href="#sec-jednostki">1. Jednostki motoryczne</a></li>
+        <li><a href="#sec-wrzecionka">2. Wrzeciona nerwowo-mięśniowe</a></li>
+        <li><a href="#sec-motoneurony">3. Motoneurony i komórki Renshawa</a></li>
+        <li><a href="#sec-golgi">4. Narząd ścięgnisty Golgiego</a></li>
+        <li><a href="#sec-odruchy">5. Odruchy rdzeniowe i badanie</a></li>
+        <li><a href="#sec-przedsionek">6. Aparat przedsionkowy</a></li>
+        <li><a href="#sec-pien">7. Rola pnia mózgu</a></li>
+        <li><a href="#sec-kora">8. Kora ruchowa i etapy ruchu</a></li>
+        <li><a href="#sec-zwoje">9. Jądra podstawy (zwoje)</a></li>
+        <li><a href="#sec-mozdzek">10. Organizacja móżdżku</a></li>
+        <li><a href="#sec-quiz">11. Interaktywny Test Wiedzy</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Główny Panel Dokumentu -->
+  <main class="content">
+
+    <!-- Nagłówek Dokumentu -->
+    <header class="header-bar">
+      <div class="header-titles">
+        <h1>Fizjologia Układu Ruchowego</h1>
+        <div class="subtitle">
+          <span>Seminarium 4: Kontrola motoryczna, odruchy rdzeniowe, układ przedsionkowy, pień, kora, jądra podstawy i móżdżek</span>
+        </div>
+      </div>
+      <button class="print-button" onclick="window.print()">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+        Drukuj / PDF
+      </button>
+    </header>
+
+    <!-- SEKCJA 1: JEDNOSTKI MOTORYCZNE -->
+    <section id="sec-jednostki">
+      <h2 class="section-title">1. Jednostki motoryczne i klasyfikacja miocytów</h2>
+      
+      <p>
+        <strong>Jednostka motoryczna (motor unit)</strong> stanowi podstawową strukturę czynnościową układu ruchowego. Z definicji obejmuje <em>pojedynczy motoneuron $\alpha$ (ciało komórkowe w rogach przednich rdzenia kręgowego lub jądrach ruchowych nerwów czaszkowych), jego akson wraz z rozgałęzieniami oraz wszystkie komórki mięśniowe (miocyty ekstrafuzalne)</em>, które ten akson zaopatruje. Wszystkie włókna mięśniowe wchodzące w skład jednej jednostki motorycznej należą do tego samego typu metabolicznego i kurczą się równocześnie zgodnie z zasadą „wszystko albo nic”.
+      </p>
+
+      <div class="card card-key">
+        <h4>Wskaźnik unerwienia (innervation ratio)</h4>
+        Liczba miocytów przypadających na jeden motoneuron determinuje precyzję czynnościową mięśnia:
+        <ul>
+          <li><strong>Mięśnie precyzyjne</strong> (np. mięśnie gałkoruchowe, mięśnie krtani, drobne mięśnie ręki): stosunek wynosi od <strong>$1:3$ do $1:10$</strong>. Umożliwia to niezwykle subtelne stopniowanie siły.</li>
+          <li><strong>Mięśnie posturalne i lokomocyjne</strong> (np. mięsień czworogłowy uda, mięsień brzuchaty łydki): stosunek wynosi <strong>$1:1000$ do $1:2000$</strong>, co pozwala na generowanie olbrzymiej siły przy małej rozdzielczości sterowania.</li>
+        </ul>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Parametr</th>
+              <th>Typ I (S – Slow)</th>
+              <th>Typ IIA (FR – Fast Resistant)</th>
+              <th>Typ IIX / IIB (FF – Fast Fatigable)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Charakterystyka kurczliwości</strong></td>
+              <td>Wolnokurczliwe, niska siła pojedynczego skurczu</td>
+              <td>Szybkokurczliwe, umiarkowanie wysoka siła</td>
+              <td>Bardzo szybkokurczliwe, maksymalna siła</td>
+            </tr>
+            <tr>
+              <td><strong>Główny profil metaboliczny</strong></td>
+              <td>Tlenowy (oksydacyjny), wysoka kapilaryzacja</td>
+              <td>Glikolityczno-tlenowy (mieszany)</td>
+              <td>Glikolityczny (anaerobowy)</td>
+            </tr>
+            <tr>
+              <td><strong>Zawartość mioglobiny i mitochondriów</strong></td>
+              <td>Bardzo wysoka (mięśnie „czerwone”)</td>
+              <td>Średnio wysoka</td>
+              <td>Niska (mięśnie „białe”)</td>
+            </tr>
+            <tr>
+              <td><strong>Odporność na zmęczenie</strong></td>
+              <td>Bardzo wysoka (ciągła praca posturalna)</td>
+              <td>Umiarkowana</td>
+              <td>Bardzo niska (błyskawiczne wyczerpanie)</td>
+            </tr>
+            <tr>
+              <td><strong>Cechy motoneuronu $\alpha$</strong></td>
+              <td>Mała średnica perikarionu, cienki akson, niska prędkość przewodzenia, niski próg pobudliwości</td>
+              <td>Średnia średnica komórki i aksonu, pośrednia prędkość przewodzenia</td>
+              <td>Duży perikarion, gruby akson, bardzo wysoka prędkość przewodzenia, wysoki próg pobudliwości</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subsection-title">Zasada wielkości Hennemana (Henneman's Size Principle)</h3>
+      <p>
+        Podczas stopniowania siły skurczu mięśniowego układ nerwowy rekrutuje jednostki motoryczne w ściśle zdefiniowanej kolejności:
+      </p>
+      <ol>
+        <li>Jako pierwsze pobudzane są jednostki <strong>Typu I (wolne)</strong>, ponieważ ich mniejsze motoneurony mają mniejszą powierzchnię błony, wyższy opór wejściowy ($R_{in}$) i zgodnie z prawem Ohma ($\Delta V = I \cdot R$) osiągają próg depolaryzacji przy niższym prądzie synaptycznym.</li>
+        <li>W miarę wzrostu zapotrzebowania na siłę rekrutowane są jednostki <strong>Typu IIA</strong>.</li>
+        <li>Przy maksymalnych, eksplozywnych wysiłkach dołączają jednostki <strong>Typu IIX/IIB</strong>.</li>
+      </ol>
+      <p>
+        Drugim mechanizmem regulacji siły jest <strong>kodowanie częstotliwościowe</strong> (rate coding) – wzrost częstości wyładowań motoneuronu prowadzi do zjawiska sumowania czasowego skurczów aż do powstania skurczu tężcowego zupełnego.
+      </p>
+    </section>
+
+    <!-- SEKCJA 2: WRZECIONA NERWOWO-MIĘŚNIOWE -->
+    <section id="sec-wrzecionka">
+      <h2 class="section-title">2. Receptory mięśni szkieletowych i wrzeciona nerwowo-mięśniowe</h2>
+      
+      <p>
+        Wbrew potocznemu uproszczeniu, receptor mięśniowy nie jest jedynie nagim zakończeniem nerwowym, lecz <em>złożonym mikro-narządem zmysłowym</em> wkomponowanym w strukturę tkanki mięśniowej. Wyróżniamy dwa podstawowe proprioceptory: <strong>wrzeciona nerwowo-mięśniowe</strong> (rejestrujące długość i tempo zmiany długości mięśnia, ułożone <em>równolegle</em> do miocytów) oraz <strong>narządy ścięgniste Golgiego</strong> (rejestrujące napięcie mięśniowe, włączone <em>szeregowo</em>).
+      </p>
+
+      <!-- SVG SCHEMAT 1: WRZECIONKO VS GOLGI -->
+      <div class="svg-wrapper">
+        <svg viewBox="0 0 850 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- Tło schematu -->
+          <rect width="850" height="260" fill="#f8fafc" rx="10"/>
+          
+          <!-- Lewa strona: Wrzeciono nerwowo-mięśniowe (równoległe) -->
+          <g transform="translate(30, 20)">
+            <text x="180" y="20" font-family="sans-serif" font-weight="bold" font-size="14" fill="#0f2b48" text-anchor="middle">Wrzeciono Nerwowo-Mięśniowe (Układ Równoległy)</text>
+            
+            <!-- Ścięgno góra i dół -->
+            <path d="M 40 40 L 320 40" stroke="#94a3b8" stroke-width="8" stroke-linecap="round"/>
+            <path d="M 40 200 L 320 200" stroke="#94a3b8" stroke-width="8" stroke-linecap="round"/>
+            
+            <!-- Włókna ekstrafuzalne zewnętrzne -->
+            <rect x="50" y="48" width="40" height="144" fill="#fca5a5" stroke="#dc2626" stroke-width="1.5" rx="4"/>
+            <rect x="270" y="48" width="40" height="144" fill="#fca5a5" stroke="#dc2626" stroke-width="1.5" rx="4"/>
+            <text x="70" y="125" font-family="sans-serif" font-size="11" fill="#7f1d1d" text-anchor="middle" transform="rotate(-90 70 125)">Ekstrafuzalne</text>
+            <text x="290" y="125" font-family="sans-serif" font-size="11" fill="#7f1d1d" text-anchor="middle" transform="rotate(-90 290 125)">Ekstrafuzalne</text>
+            
+            <!-- Torebka łącznotkankowa wrzeciona -->
+            <ellipse cx="180" cy="120" rx="45" ry="72" fill="#eff6ff" stroke="#2563eb" stroke-dasharray="4" stroke-width="2"/>
+            
+            <!-- Włókna intrafuzalne -->
+            <!-- Nuclear bag -->
+            <path d="M 165 55 C 165 95 150 110 150 120 C 150 130 165 145 165 185" stroke="#d97706" stroke-width="5" fill="none"/>
+            <ellipse cx="157" cy="120" rx="9" ry="14" fill="#fbbf24"/>
+            <!-- Nuclear chain -->
+            <path d="M 195 55 L 195 185" stroke="#059669" stroke-width="4" fill="none"/>
+            <circle cx="195" cy="108" r="3.5" fill="#10b981"/>
+            <circle cx="195" cy="120" r="3.5" fill="#10b981"/>
+            <circle cx="195" cy="132" r="3.5" fill="#10b981"/>
+            
+            <!-- Zakończenie Ia (pierścieniowo-spiralne) -->
+            <path d="M 145 110 Q 175 115 145 125 Q 175 130 145 135" stroke="#4338ca" stroke-width="2.5" fill="none"/>
+            <path d="M 160 120 L 220 120" stroke="#4338ca" stroke-width="2" marker-end="url(#arrow)"/>
+            <text x="225" y="124" font-family="sans-serif" font-size="10" font-weight="bold" fill="#4338ca">Aferent Ia</text>
+            
+            <!-- Unerwienie ruchowe gamma na biegunach -->
+            <path d="M 120 70 L 163 70" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="2"/>
+            <text x="115" y="73" font-family="sans-serif" font-size="9" font-weight="bold" fill="#dc2626" text-anchor="end">Akson $\gamma$</text>
+            <path d="M 120 170 L 163 170" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="2"/>
+            <text x="115" y="173" font-family="sans-serif" font-size="9" font-weight="bold" fill="#dc2626" text-anchor="end">Akson $\gamma$</text>
+          </g>
+          
+          <!-- Prawa strona: Narząd ścięgnisty Golgiego (szeregowy) -->
+          <g transform="translate(480, 20)">
+            <text x="160" y="20" font-family="sans-serif" font-weight="bold" font-size="14" fill="#0f2b48" text-anchor="middle">Narząd Ścięgnisty Golgiego (Układ Szeregowy)</text>
+            
+            <!-- Kość / przyczep -->
+            <rect x="20" y="110" width="30" height="40" fill="#94a3b8" rx="4"/>
+            <text x="35" y="135" font-family="sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">Kość</text>
+            
+            <!-- Ścięgno właściwe z torebką GTO -->
+            <path d="M 50 120 L 100 120" stroke="#cbd5e1" stroke-width="12"/>
+            <ellipse cx="140" cy="130" rx="40" ry="24" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+            
+            <!-- Wplecione włókna kolagenowe -->
+            <path d="M 105 125 Q 140 140 175 125" stroke="#047857" stroke-width="2" fill="none"/>
+            <path d="M 105 135 Q 140 120 175 135" stroke="#047857" stroke-width="2" fill="none"/>
+            
+            <!-- Włókno aferentne Ib oplatające kolagen -->
+            <path d="M 140 130 C 130 115 150 110 140 90 L 140 60" stroke="#0284c7" stroke-width="2.5" fill="none"/>
+            <circle cx="140" cy="130" r="4" fill="#0284c7"/>
+            <text x="148" y="70" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0284c7">Aferent Ib</text>
+            
+            <!-- Brzusiec mięśnia (szeregowo) -->
+            <rect x="180" y="95" width="130" height="70" fill="#fca5a5" stroke="#dc2626" stroke-width="2" rx="8"/>
+            <text x="245" y="138" font-family="sans-serif" font-size="13" font-weight="bold" fill="#7f1d1d" text-anchor="middle">Brzusiec mięśnia</text>
+          </g>
+        </svg>
+        <div class="svg-caption">Ryc. 1. Biomechaniczna konfiguracja receptorów: Wrzeciono mięśniowe włączone równolegle (detekcja długości) oraz Narząd Golgiego włączony szeregowo na złączu mięśniowo-ścięgnistym (detekcja siły napięcia).</div>
+      </div>
+
+      <h3 class="subsection-title">Budowa histologiczna wrzeciona mięśniowego</h3>
+      <p>
+        Wrzeciono składa się z łącznotkankowej torebki wypełnionej płynem limfatycznym, obejmującej od kilku do kilkunastu zmodyfikowanych miocytów zwanych <strong>włóknami intrafuzalnymi</strong>:
+      </p>
+      <ul>
+        <li>
+          <strong>Włókna z woreczkiem jąder (nuclear bag fibers):</strong> posiadają rozszerzoną część centralną (równikową), w której skupione są liczne jądra komórkowe. Dzielą się na:
+          <ul>
+            <li><em>Włókna dynamiczne ($bag_1$):</em> rejestrują przede wszystkim <strong>prędkość rozciągania</strong> mięśnia ($d\Delta L / dt$).</li>
+            <li><em>Włókna statyczne ($bag_2$):</em> informują o <strong>bezwzględnej długości</strong> mięśnia w spoczynku i podczas powolnego ruchu.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Włókna z łańcuszkiem jąder (nuclear chain fibers):</strong> są cieńsze i krótsze; jądra komórkowe ułożone są w nich jednoszeregowo na kształt łańcuszka. Odpowiadają wyłącznie za <strong>składową statyczną</strong> czucia rozciągnięcia.
+        </li>
+      </ul>
+
+      <h3 class="subsection-title">Czuciowe i ruchowe unerwienie włókien intrafuzalnych</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Typ Włókna</th>
+              <th>Pochodzenie / Cel</th>
+              <th>Morfologia Zakończenia</th>
+              <th>Kodowana Informacja</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Czuciowe Ia ($A\alpha$)</strong><br>(grube, $12\text{--}20\ \mu\mathrm{m}$, $70\text{--}120\ \mathrm{m/s}$)</td>
+              <td>Owijają środkową część włókien z woreczkiem ($bag_1$, $bag_2$) oraz z łańcuszkiem</td>
+              <td><strong>Pierścieniowo-spiralne</strong> (annulospiral endings)</td>
+              <td>Bardzo wysoka czułość na <strong>dynamikę</strong> (szybkość rozciągania) oraz informacja o długości statycznej</td>
+            </tr>
+            <tr>
+              <td><strong>Czuciowe II ($A\beta$)</strong><br>(średnie, $4\text{--}12\ \mu\mathrm{m}$, $30\text{--}70\ \mathrm{m/s}$)</td>
+              <td>Zlokalizowane przybiegunowo, głównie na włóknach z łańcuszkiem i $bag_2$</td>
+              <td><strong>Groniaste / gałązkowate</strong> (flower-spray endings)</td>
+              <td>Wyłącznie <strong>statyczna długość</strong> mięśnia (brak odpowiedzi na dynamiczne przyspieszenie rozciągania)</td>
+            </tr>
+            <tr>
+              <td><strong>Ruchowe $\gamma$-dynamiczne</strong></td>
+              <td>Bieguny kurczliwe włókien z woreczkiem $bag_1$</td>
+              <td>Zakończenia płytkowe</td>
+              <td>Zwiększają dynamiczną czułość wrzeciona na nagłe zmiany długości</td>
+            </tr>
+            <tr>
+              <td><strong>Ruchowe $\gamma$-statyczne</strong></td>
+              <td>Bieguny kurczliwe włókien z woreczkiem $bag_2$ i z łańcuszkiem</td>
+              <td>Zakończenia siateczkowate</td>
+              <td>Ustawiają stały poziom napięcia wrzeciona (czułość statyczna)</td>
+            </tr>
+            <tr>
+              <td><strong>Ruchowe $\beta$ (szkieletowo-wrzecionowe)</strong></td>
+              <td>Zaopatrują równolegle miocyty ekstrafuzalne i intrafuzalne</td>
+              <td>Płytki motoryczne</td>
+              <td>Kolateralna koordynacja skurczu obu kompartmentów</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SEKCJA 3: MOTONEURONY I KOMÓRKI RENSHAWA -->
+    <section id="sec-motoneurony">
+      <h2 class="section-title">3. Motoneurony rdzenia kręgowego i pętla komórek Renshawa</h2>
+      
+      <p>
+        W rogach przednich istoty szarej rdzenia kręgowego zlokalizowane są ciała komórkowe <strong>dolnego motoneuronu</strong>. Wyróżniamy trzy główne klasy tych komórek:
+      </p>
+      <ul>
+        <li><strong>Motoneurony $\alpha$:</strong> duże komórki nerwowe ($>12\ \mu\mathrm{m}$) o prędkości przewodzenia $70\text{--}120\ \mathrm{m/s}$. Zaopatrują miocyty ekstrafuzalne, generując główną siłę skurczu wolontarycznego i odruchowego.</li>
+        <li><strong>Motoneurony $\gamma$:</strong> mniejsze neurony ($15\text{--}30\ \mathrm{m/s}$) unerwiające wyłącznie kurczliwe bieguny włókien intrafuzalnych. Nie wytwarzają bezpośredniej siły użytkowej, lecz regulują wrażliwość receptorową wrzecion.</li>
+        <li><strong>Motoneurony $\beta$:</strong> zaopatrują jednocześnie miocyty wewnątrz- i zewnątrztorebkowe.</li>
+      </ul>
+
+      <div class="card card-key">
+        <h4>Zjawisko koaktywacji $\alpha$-$\gamma$ (współaktywacja)</h4>
+        Gdyby podczas skurczu mięśnia wywołanego przez motoneuron $\alpha$ doszło do zwiotczenia włókien intrafuzalnych, wrzecionko uległoby odciążeniu i przestałoby wysyłać impulsy czuciowe Ia/II („martwa strefa” czucia proprioceptywnego). Dzięki <strong>jednoczesnemu pobudzeniu motoneuronów $\gamma$</strong>, bieguny intrafuzalne kurczą się, napinając część centralną receptora. Pozwala to na <em>zachowanie stałej kontroli długości mięśnia i gotowości odruchowej w trakcie trwania całego ruchu</em>.
+      </div>
+
+      <h3 class="subsection-title">Komórki Renshawa i hamowanie zwrotne (recurrent inhibition)</h3>
+      <p>
+        Akson motoneuronu $\alpha$ tuż przed opuszczeniem rdzenia oddaje <strong>kolaterale powracające</strong> do istoty szarej. Kolaterale te uwalniają <em>acetylocholinę</em> i tworzą synapsy pobudzające z wyspecjalizowanymi interneuronami hamującymi – <strong>komórkami Renshawa</strong>.
+      </p>
+      <p>
+        Pobudzona komórka Renshawa wysyła akson z powrotem do tego samego motoneuronu $\alpha$ (oraz sąsiadujących motoneuronów tej samej grupy mięśniowej), uwalniając neuroprzekaźnik <strong>glicynę</strong> (oraz częściowo GABA). Glicyna otwiera kanały chlorkowe ($\mathrm{Cl}^-$) sprzężone z receptorem glicynowym, wywołując prąd napływowy $\mathrm{Cl}^-$, hiperpolaryzację błony i generując <strong>hamujący potencjał postsynaptyczny (IPSP)</strong>.
+      </p>
+
+      <!-- SVG SCHEMAT 2: KOMÓRKA RENSHAWA I ODRUCHY -->
+      <div class="svg-wrapper">
+        <svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="320" fill="#f8fafc" rx="10"/>
+          
+          <!-- Obrys rogu przedniego i tylnego rdzenia -->
+          <path d="M 50 160 C 50 70 120 40 220 40 C 300 40 330 110 330 160 C 330 210 300 280 220 280 C 120 280 50 250 50 160 Z" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+          <text x="180" y="65" font-family="sans-serif" font-size="12" font-weight="bold" fill="#64748b" text-anchor="middle">Róg przedni rdzenia</text>
+          
+          <!-- Motoneuron alfa -->
+          <circle cx="230" cy="190" r="18" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2"/>
+          <text x="230" y="195" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">$\alpha$</text>
+          
+          <!-- Akson alfa biegnący na obwód -->
+          <path d="M 248 190 L 520 190" stroke="#3b82f6" stroke-width="4" fill="none"/>
+          <text x="390" y="180" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1d4ed8">Akson $\alpha$-motoneuronu</text>
+          
+          <!-- Mięsień ekstrafuzalny -->
+          <rect x="520" y="160" width="160" height="60" fill="#fca5a5" stroke="#dc2626" stroke-width="2" rx="6"/>
+          <text x="600" y="195" font-family="sans-serif" font-size="12" font-weight="bold" fill="#7f1d1d" text-anchor="middle">Mięsień efektorowy</text>
+          
+          <!-- Kolaterala aksonu alfa do komórki Renshawa -->
+          <path d="M 320 190 C 320 140 240 130 195 130" stroke="#3b82f6" stroke-width="2.5" stroke-dasharray="3" fill="none"/>
+          <text x="260" y="145" font-family="sans-serif" font-size="10" fill="#1d4ed8">ACh (+)</text>
+          
+          <!-- Komórka Renshawa -->
+          <circle cx="175" cy="130" r="14" fill="#10b981" stroke="#047857" stroke-width="2"/>
+          <text x="175" y="134" font-family="sans-serif" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">R</text>
+          <text x="175" y="105" font-family="sans-serif" font-size="11" font-weight="bold" fill="#047857" text-anchor="middle">K. Renshawa</text>
+          
+          <!-- Akson hamujący Renshawa do alfa -->
+          <path d="M 175 144 C 175 180 205 190 212 190" stroke="#ef4444" stroke-width="3" fill="none"/>
+          <!-- Zakończenie synapsy hamującej (kreska) -->
+          <line x1="210" y1="185" x2="210" y2="195" stroke="#ef4444" stroke-width="3"/>
+          <text x="150" y="175" font-family="sans-serif" font-size="10" font-weight="bold" fill="#ef4444">Glicyna (-)</text>
+          
+          <!-- Wyjście kolaterali Renshawa do interneuronów Ia -->
+          <path d="M 161 130 L 100 130" stroke="#ef4444" stroke-width="2" stroke-dasharray="2" fill="none"/>
+          <text x="110" y="120" font-family="sans-serif" font-size="9" fill="#b91c1c">Hamowanie sąsiadów</text>
+          
+          <!-- Ramka wyjaśniająca mechanizm -->
+          <rect x="420" y="30" width="350" height="100" fill="#eff6ff" stroke="#93c5fd" rx="8"/>
+          <text x="430" y="52" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e3a8a">Funkcje Pętli Renshawa:</text>
+          <text x="430" y="70" font-family="sans-serif" font-size="10" fill="#1e40af">• Ujemne sprzężenie zwrotne: ochrona przed wyczerpaniem i tężyczką</text>
+          <text x="430" y="86" font-family="sans-serif" font-size="10" fill="#1e40af">• Ograniczenie czasu trwania salwy wyładowań (timing ruchu)</text>
+          <text x="430" y="102" font-family="sans-serif" font-size="10" fill="#1e40af">• Hamowanie oboczne: wyostrzenie selektywności motorycznej</text>
+          <text x="430" y="118" font-family="sans-serif" font-size="10" fill="#1e40af">• Neurotransmiter: Glicyna (blokowana przez strychninę i tężec!)</text>
+        </svg>
+        <div class="svg-caption">Ryc. 2. Pętla ujemnego sprzężenia zwrotnego komórki Renshawa: kolaterala motoneuronu $\alpha$ stymuluje interneuron glicynergiczny (R), który generuje IPSP na motoneuronie wyjściowym.</div>
+      </div>
+
+      <div class="card card-clinical">
+        <h4>Korelacja toksykologiczna: Toksyna tężcowa i strychnina</h4>
+        <ul>
+          <li><strong>Toksyna tężcowa (tetanospasmina):</strong> produkowana przez <em>Clostridium tetani</em>, wędruje transportem aksonalnym wstecznym do rdzenia kręgowego i blokuje uwalnianie <strong>glicyny i GABA</strong> z komórek Renshawa (poprzez cięcie białka synaptobrewiny). Brak hamowania motoneuronów $\alpha$ wywołuje uogólnione, bolesne skurcze spastyczne (szczękościsk, <em>opisthotonus</em>).</li>
+          <li><strong>Strychnina:</strong> jest kompetycyjnym antagonistą <strong>receptorów glicynowych</strong> w rdzeniu kręgowym. Uniemożliwia wywołanie IPSP przez komórki Renshawa, co prowadzi do drgawek tężcowych przy najdrobniejszym bodźcu czuciowym.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SEKCJA 4: NARZĄDY GOLGIEGO -->
+    <section id="sec-golgi">
+      <h2 class="section-title">4. Narządy ścięgniste Golgiego i odwrócony odruch miotatyczny</h2>
+      
+      <p>
+        <strong>Narządy ścięgniste Golgiego (wrzecionka nerwowo-ścięgnowe)</strong> leżą na granicy mięśnia i ścięgna. W przeciwieństwie do wrzecion mięśniowych <em>nie zawierają miocytów</em>, lecz składają się z pęczków włókien kolagenowych splecionych z nagimi rozgałęzieniami aksonów czuciowych <strong>grupy Ib</strong> ($A\alpha$, prędkość $70\text{--}120\ \mathrm{m/s}$).
+      </p>
+      <p>
+        Ze względu na <strong>szeregowe ułożenie</strong> względem komórek mięśniowych:
+      </p>
+      <ul>
+        <li>Reagują słabo na bierne rozciąganie mięśnia (napięcie rozkłada się na elastyczną tkankę łączną).</li>
+        <li>Są <strong>niezwykle czułe na aktywny skurcz mięśnia</strong> – skracające się miocyty pociągają za ścięgno, prostują włókna kolagenowe i zaciskają je wokół zakończeń nerwowych Ib, otwierając mechanowrażliwe kanały kationowe.</li>
+      </ul>
+
+      <div class="card card-key">
+        <h4>Odwrócony odruch na rozciąganie (odruch miotatyczny ujemny / z narządów Golgiego)</h4>
+        Jest to odruch <strong>dwusynaptyczny (polisynaptyczny)</strong> o charakterze ujemnego sprzężenia zwrotnego:
+        <ol>
+          <li>Silny skurcz mięśnia $\to$ pobudzenie narządu Golgiego $\to$ salwa impulsów we włóknie <strong>Ib</strong>.</li>
+          <li>Włókno Ib wchodzi do rogu tylnego rdzenia i tworzy synapsę pobudzającą (glutaminian) z <strong>interneuronem hamującym Ib</strong>.</li>
+          <li>Interneuron Ib uwalnia glicynę, silnie hamując motoneuron $\alpha$ <em>tego samego (napiętego) mięśnia</em> $\to$ następuje nagły rozkurcz mięśnia.</li>
+          <li>Jednocześnie poprzez boczny <strong>interneuron pobudzający</strong> dochodzi do aktywacji motoneuronu $\alpha$ <em>mięśnia antagonistycznego</em>.</li>
+        </ol>
+        <em>Funkcja fizjologiczna:</em> Zabezpieczenie przed mechanicznym zerwaniem przyczepu ścięgnistego przy skrajnych przeciążeniach oraz wyrównywanie napięcia pomiędzy poszczególnymi wiązkami mięśniowymi.
+      </div>
+    </section>
+
+    <!-- SEKCJA 5: ODRUCHY RDZENIOWE I BADANIE NEUROLOGICZNE -->
+    <section id="sec-odruchy">
+      <h2 class="section-title">5. Odruchy rdzeniowe i ich diagnostyka kliniczna</h2>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Odruch</th>
+              <th>Receptor i Aferent</th>
+              <th>Liczba Synaps</th>
+              <th>Odpowiedź Narządu</th>
+              <th>Funkcja Fizjologiczna</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Miotatyczny dodatni</strong><br>(rozciągowy, np. kolanowy)</td>
+              <td>Wrzeciono mięśniowe<br>Włókno <strong>Ia</strong></td>
+              <td><strong>Monosynaptyczny</strong><br>(1 synapsa w OUN)</td>
+              <td>Skurcz mięśnia rozciąganego + hamowanie wzajemne antagonisty</td>
+              <td>Utrzymanie stałej długości mięśnia i pionowej postawy ciała</td>
+            </tr>
+            <tr>
+              <td><strong>Miotatyczny ujemny</strong><br>(odwrócony na rozciąganie)</td>
+              <td>Narząd Golgiego<br>Włókno <strong>Ib</strong></td>
+              <td><strong>Dwusynaptyczny</strong><br>(z interneuronem Ib)</td>
+              <td>Rozkurcz mięśnia napiętego + pobudzenie antagonisty</td>
+              <td>Ochrona przed zerwaniem ścięgna, modulacja napięcia</td>
+            </tr>
+            <tr>
+              <td><strong>Zgięciowy (obronny / cofania)</strong></td>
+              <td>Nocyceptory skórne<br>Włókna <strong>A$\delta$ oraz C</strong></td>
+              <td><strong>Polisynaptyczny</strong><br>(wieloneuronalny)</td>
+              <td>Pobudzenie zginaczy i zahamowanie prostowników kończyny drażnionej</td>
+              <td>Błyskawiczne usunięcie kończyny z pola zagrożenia bólowego</td>
+            </tr>
+            <tr>
+              <td><strong>Skrzyżowany wyprostny</strong></td>
+              <td>Kolaterale odruchu zgięciowego (spoidło przednie)</td>
+              <td><strong>Polisynaptyczny</strong><br>(przechodzi na drugą stronę rdzenia)</td>
+              <td>Pobudzenie prostowników i hamowanie zginaczy kończyny przeciwległej</td>
+              <td>Kompensacyjne podparcie ciężaru ciała po uniesieniu kończyny bolącej</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card card-pearl">
+        <h4>Mechanizm Hamowania Wzajemnego (Reciprocal Inhibition)</h4>
+        W odruchu kolanowym uderzenie młotkiem neurologicznym w więzadło rzepki rozciąga mięsień czworogłowy uda. Impulsacja Ia pobudza bezpośrednio motoneuron $\alpha$ mięśnia czworogłowego (skurcz – prostowanie kolana), a boczna kolaterala pobudza <strong>interneuron hamujący Ia</strong>, który wygasza aktywność motoneuronu $\alpha$ mięśni kulszowo-goleniowych (antagonistów zginających kolano). Zapobiega to konfliktowi mechanicznemu mięśni.
+      </div>
+
+      <h3 class="subsection-title">Różnicowanie uszkodzeń układu ruchowego w badaniu neurologicznym</h3>
+      
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Cecha kliniczna</th>
+              <th>Zespół Dolnego Motoneuronu (Obwodowego)</th>
+              <th>Zespół Górnego Motoneuronu (Ośrodkowego / Piramidowego)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Lokalizacja uszkodzenia</strong></td>
+              <td>Ciało motoneuronu $\alpha$ (rogi przednie rdzenia, jądra n. czaszkowych) lub akson obwodowy</td>
+              <td>Kora ruchowa (M1) lub drogi zstępujące (korowo-rdzeniowe, torebka wewnętrzna, pień)</td>
+            </tr>
+            <tr>
+              <td><strong>Napięcie mięśniowe</strong></td>
+              <td><strong>Hipotonia lub atonia</strong> (wiotkość) – przerwanie łuku odruchowego</td>
+              <td><strong>Hipertonia spastyczna</strong> (napięcie „scyzorykowe” – <em>clasp-knife</em>), wzmożenie oporu zależne od prędkości ruchu</td>
+            </tr>
+            <tr>
+              <td><strong>Odruchy głębokie (ścięgniste)</strong></td>
+              <td><strong>Zniesione (arefleksja)</strong> lub znacznie osłabione (hiporefleksja)</td>
+              <td><strong>Wybitnie wygórowane (hiperrefleksja)</strong>, rozszerzenie strefy odruchowej, klonusy (trząsotrzepot rzepki/stopy)</td>
+            </tr>
+            <tr>
+              <td><strong>Trofik mięśni (zaniki)</strong></td>
+              <td><strong>Wczesny, głęboki zanik</strong> (atrofia z odnerwienia – utrata czynników troficznych)</td>
+              <td>Brak pierwotnych zaników (jedynie późny, niewielki zanik z nieużywania – <em>disuse atrophy</em>)</td>
+            </tr>
+            <tr>
+              <td><strong>Fascykulacje (drżenia pęczkowe)</strong></td>
+              <td><strong>Obecne</strong> (nadwrażliwość odnerwieniowa i spontaniczne wyładowania umierających jednostek)</td>
+              <td>Nieobecne</td>
+            </tr>
+            <tr>
+              <td><strong>Odruchy patologiczne</strong></td>
+              <td>Brak</td>
+              <td><strong>Obecne: objaw Babińskiego</strong> (grzbietowe zgięcie palucha i wachlarzowe odwiedzenie pozostałych palców), Rossolimo, Oppenheima</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card card-clinical">
+        <h4>Szok rdzeniowy (Spinal Shock)</h4>
+        Przy ostrym, całkowitym poprzecznym przerwaniu rdzenia kręgowego (np. uraz komunikacyjny):
+        <ul>
+          <li><strong>Faza ostra (trwająca od kilkudziesięciu godzin do kilku tygodni):</strong> nagłe odcięcie tonicznych dróg zstępujących z pnia mózgu wywołuje głęboką hiperpolaryzację motoneuronów rdzeniowych. Skutkuje to całkowitym <em>zniesieniem wszystkich odruchów poniżej uszkodzenia, porażeniem wiotkim, atonią pęcherza moczowego oraz spadkiem ciśnienia tętniczego</em> (utrata napięcia współczulnego).</li>
+          <li><strong>Faza przewlekła:</strong> stopniowe odzyskiwanie autonomii rdzeniowej poprzez pączkowanie aksonalne i nadwrażliwość postsynaptyczną na odnerwienie. Pojawia się <strong>utrwalona spastyczność, wygórowanie odruchów ścięgnistych, automatyzm pęcherzowy oraz obustronny objaw Babińskiego</strong>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SEKCJA 6: APARAT PRZEDSIONKOWY -->
+    <section id="sec-przedsionek">
+      <h2 class="section-title">6. Aparat przedsionkowy, mechanotransdukcja i odruchy</h2>
+      
+      <p>
+        Błędnik błoniasty w uchu wewnętrznym odpowiada za rejestrację położenia ciała oraz dynamiki ruchu głowy w przestrzeni trójwymiarowej. Dzieli się na dwie jednostki czynnościowe:
+      </p>
+      <ul>
+        <li>
+          <strong>Kanały półkoliste (przedni, tylny, boczny):</strong> zorientowane prostopadle do siebie w trzech płaszczyznach przestrzennych. W rozszerzeniach bańkowych zawierają <strong>grzebienie bańkowe (cristae ampullares)</strong> pokryte galaretowatym <strong>osklepkiem (cupula)</strong>. Rejestrują <strong>przyspieszenia kątowe (rotacje głowy)</strong>.
+        </li>
+        <li>
+          <strong>Narządy otolitowe (łagiewka i woreczek):</strong> zawierają <strong>plamki (maculae)</strong> pokryte błoną otolitową obciążoną kamyczkami z węglanu wapnia ($\mathrm{CaCO}_3$). Rejestrują <strong>przyspieszenia liniowe oraz wektor grawitacji</strong>. Plamka łagiewki (pozioma) reaguje na przyspieszenia w płaszczyźnie horyzontalnej (np. ruszanie samochodem), a plamka woreczka (pionowa) na siły wertykalne (np. jazda windą, grawitacja).
+        </li>
+      </ul>
+
+      <!-- SVG SCHEMAT 3: MECHANOTRANSDUKCJA W KOMÓRCE WŁOSOWATEJ -->
+      <div class="svg-wrapper">
+        <svg viewBox="0 0 820 330" xmlns="http://www.w3.org/2000/svg">
+          <rect width="820" height="330" fill="#f8fafc" rx="10"/>
+          
+          <!-- Endolimfa góra -->
+          <rect x="30" y="20" width="760" height="70" fill="#e0f2fe" rx="6"/>
+          <text x="50" y="45" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1">ENDOLIMFA: Bardzo wysokie $[K^+] \approx 145\ \mathrm{mmol/l}$, potencjał $+80\ \mathrm{mV}$</text>
+          
+          <!-- Komórka włosowata -->
+          <path d="M 280 120 L 540 120 L 510 270 L 310 270 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="410" y="210" font-family="sans-serif" font-size="13" font-weight="bold" fill="#92400e" text-anchor="middle">Komórka Włosowata (Hair Cell)</text>
+          
+          <!-- Rzęski: Stereocylia i Kinetocylium -->
+          <!-- Stereocylia o rosnącej wysokości -->
+          <rect x="330" y="55" width="8" height="65" fill="#f59e0b" rx="2"/>
+          <rect x="355" y="45" width="8" height="75" fill="#f59e0b" rx="2"/>
+          <rect x="380" y="35" width="8" height="85" fill="#f59e0b" rx="2"/>
+          <rect x="405" y="25" width="8" height="95" fill="#f59e0b" rx="2"/>
+          
+          <!-- Tip-links (łączniki szczytowe) -->
+          <line x1="338" y1="58" x2="355" y2="52" stroke="#dc2626" stroke-width="2"/>
+          <line x1="363" y1="48" x2="380" y2="42" stroke="#dc2626" stroke-width="2"/>
+          <line x1="388" y1="38" x2="405" y2="32" stroke="#dc2626" stroke-width="2"/>
+          <line x1="413" y1="28" x2="440" y2="20" stroke="#dc2626" stroke-width="2"/>
+          
+          <!-- Kinetocylium (jedno, najdłuższe) -->
+          <rect x="440" y="15" width="10" height="105" fill="#b45309" rx="3"/>
+          <circle cx="445" cy="15" r="5" fill="#b45309"/>
+          <text x="455" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#78350f">Kinetocylium</text>
+          
+          <!-- Wektor ugięcia -->
+          <path d="M 330 20 L 410 20" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+          <text x="370" y="14" font-family="sans-serif" font-size="10" font-weight="bold" fill="#2563eb" text-anchor="middle">Ugięcie ku kinetocylium</text>
+          
+          <!-- Napływ K+ przez kanały MET -->
+          <path d="M 384 28 C 384 38 395 50 395 65" stroke="#0284c7" stroke-width="2" stroke-dasharray="2"/>
+          <text x="350" y="75" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0284c7">Napływ $K^+$</text>
+          
+          <!-- Kanały wapniowe u podstawy -->
+          <circle cx="340" cy="260" r="8" fill="#ef4444"/>
+          <text x="340" y="264" font-family="sans-serif" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">$Ca^{2+}$</text>
+          
+          <!-- Pęcherzyki synaptyczne z glutaminianem -->
+          <circle cx="410" cy="255" r="5" fill="#10b981"/>
+          <circle cx="425" cy="258" r="5" fill="#10b981"/>
+          <circle cx="395" cy="258" r="5" fill="#10b981"/>
+          <text x="410" y="245" font-family="sans-serif" font-size="9" font-weight="bold" fill="#047857" text-anchor="middle">Glutaminian</text>
+          
+          <!-- Włókno aferentne nerwu VIII -->
+          <path d="M 300 295 L 520 295 L 500 325 L 320 325 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="410" y="315" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e40af" text-anchor="middle">Zakończenie aferentne n. VIII (zwój Scarpy)</text>
+          
+          <!-- Opis po prawej stronie -->
+          <rect x="570" y="100" width="220" height="150" fill="#ffffff" stroke="#cbd5e1" rx="6"/>
+          <text x="580" y="125" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f2b48">Mechanizm Transdukcji:</text>
+          <text x="580" y="145" font-family="sans-serif" font-size="10" fill="#334155">1. Ugięcie w stronę kinetocylium</text>
+          <text x="580" y="160" font-family="sans-serif" font-size="10" fill="#334155">2. Napięcie tip-links $\to$ otwarcie MET</text>
+          <text x="580" y="175" font-family="sans-serif" font-size="10" fill="#334155">3. <strong>Napływ $K^+$ wywołuje depolaryzację!</strong></text>
+          <text x="580" y="190" font-family="sans-serif" font-size="10" fill="#334155">4. Otwarcie kanałów $Ca^{2+} (V-gated)$</text>
+          <text x="580" y="205" font-family="sans-serif" font-size="10" fill="#334155">5. Wzrost wyrzutu glutaminianu</text>
+          <text x="580" y="225" font-family="sans-serif" font-size="10" font-weight="bold" fill="#b91c1c">Ugięcie odwrócone $\to$ hiperpolaryzacja</text>
+        </svg>
+        <div class="svg-caption">Ryc. 3. Biofizyka pobudzenia komórki rzęsatej: unikalna rola endolimfy bogatej w potas ($K^+$) w generowaniu potencjału receptorowego.</div>
+      </div>
+
+      <div class="card card-pearl">
+        <h4>Dlaczego to potas ($K^+$) depolaryzuje komórkę włosowatą?</h4>
+        W przeciwieństwie do niemal wszystkich innych komórek organizmu, szczytowa powierzchnia komórek rzęsatych obmywana jest przez <strong>endolimfę</strong> o składzie przypominającym płyn wewnątrzkomórkowy ($[K^+] \approx 140\text{--}150\ \mathrm{mmol/l}$, $[Na^+] \approx 1\text{--}2\ \mathrm{mmol/l}$) oraz dodatnim potencjale endokochlearnym/endolimfatycznym wynoszącym aż <strong>$+80\ \mathrm{mV}$</strong>. Wnętrze komórki rzęsatej ma potencjał spoczynkowy około $-60\ \mathrm{mV}$. Gradient elektryczny dla jonów $K^+$ wynosi zatem <strong>$140\ \mathrm{mV}$ do wnętrza komórki</strong>! Otwarcie kanałów mechanosensywnych MET powoduje gwałtowny dokomórkowy prąd $K^+$, prowadząc do depolaryzacji.
+      </div>
+
+      <h3 class="subsection-title">Jądra przedsionkowe i drogi przedsionkowo-rdzeniowe</h3>
+      <p>
+        Włókna części przedsionkowej nerwu VIII mają swoje perikariony w <strong>zwoju przedsionkowym (Scarpy)</strong> i docierają do 4 par jąder przedsionkowych na dnie komory IV:
+      </p>
+      <ul>
+        <li><strong>Jądro przedsionkowe boczne (Deitersa):</strong> daje początek <em>drodze przedsionkowo-rdzeniowej bocznej (LVST)</em>. Zstępuje nieskrzyżowana przez całą długość rdzenia i wywiera <strong>silny toniczny wpływ pobudzający na motoneurony $\alpha$ i $\gamma$ mięśni prostowników (antygrawitacyjnych)</strong>, jednocześnie hamując zginacze. Jest kluczowa dla utrzymania spionizowanej postawy.</li>
+        <li><strong>Jądro przedsionkowe przyśrodkowe (Schwalbego) i dolne (Rollera):</strong> tworzą <em>drogę przedsionkowo-rdzeniową przyśrodkową (MVST)</em>, biegnącą obustronnie w pęczku podłużnym przyśrodkowym (MLF) do poziomu szyjnego rdzenia. Kontroluje odruchowe ruchy głowy i szyi stabilizujące wzrok podczas chodu.</li>
+        <li><strong>Jądro przedsionkowe górne (Bekhterewa) i przyśrodkowe:</strong> wysyłają projekcje wstępujące do jąder nerwów okoruchowych (III, IV, VI), realizując <strong>odruch przedsionkowo-oczny (VOR)</strong>.</li>
+      </ul>
+
+      <div class="card card-clinical">
+        <h4>Odruch przedsionkowo-oczny (VOR) i oczopląs</h4>
+        <ul>
+          <li><strong>Odruch przedsionkowo-oczny (VOR):</strong> stabilizuje obraz na siatkówce przy ruchach głowy. Obrót głowy w lewo stymuluje lewy kanał poziomy $\to$ pobudzenie lewego jądra przedsionkowego $\to$ skurcz mięśnia prostego bocznego oka prawego (n. VI) i mięśnia prostego przyśrodkowego oka lewego (n. III). Gałki oczne przesuwają się w prawo z prędkością idealnie równą prędkości obrotu głowy (wzmocnienie $gain \approx 1{,}0$).</li>
+          <li><strong>Oczopląs fizjologiczny:</strong>
+            <ul>
+              <li><em>Oczopląs porotacyjny:</em> po gwałtownym zatrzymaniu obracającego się pacjenta, endolimfa na skutek bezwładności płynie dalej, odchylając osklepek w przeciwną stronę $\to$ pojawia się przejściowy oczopląs z fazą szybką skierowaną przeciwnie do wcześniejszego kierunku obrotu.</li>
+              <li><em>Oczopląs optokinetyczny (kolejowy):</em> sekwencja powolnego śledzenia uciekającego otoczenia (faza wolna) i szybkiego skoku powrotnego gałek ocznych (faza szybka, mostowa).</li>
+            </ul>
+          </li>
+          <li><strong>Próba kaloryczna Barany'ego (Mnemotechnika COWS):</strong>
+            Wlanie zimnej wody do ucha wywołuje oczopląs z fazą szybką w stronę przeciwną (<strong>C</strong>old <strong>O</strong>pposite), ciepłej wody – w tę samą stronę (<strong>W</strong>arm <strong>S</strong>ame). Brak reakcji na próbę kaloryczną i brak odruchu VOR (objawu „oczu lalki”) jest jednym z kryteriów pniowej śmierci mózgu.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SEKCJA 7: ROLA PIENIA MÓZGU -->
+    <section id="sec-pien">
+      <h2 class="section-title">7. Rola pnia mózgu: most, opuszka i śródmózgowie</h2>
+      
+      <p>
+        Ośrodki pniowe stanowią nadrzędny poziom integracji postawy ciała i tonusu mięśniowego, łącząc polecenia kory mózgowej z autonomicznym aparatem rdzenia:
+      </p>
+      <ul>
+        <li>
+          <strong>Twór siatkowaty mostu (droga siatkowo-rdzeniowa mostowa / przyśrodkowa):</strong> wykazuje silne <em>wrodzone, toniczne pobudzenie motoneuronów prostowników</em>. Umożliwia przeciwstawienie się sile grawitacji.
+        </li>
+        <li>
+          <strong>Twór siatkowaty rdzenia przedłużonego (droga siatkowo-rdzeniowa opuszkowa / boczna):</strong> działa <em>przeciwstawnie – hamuje motoneurony prostowników</em>, umożliwiając wykonanie zgięcia. Co kluczowe, ośrodek opuszkowy wymaga do działania <strong>aktywnego pobudzenia z kory mózgowej</strong>!
+        </li>
+        <li>
+          <strong>Jądro czerwienne śródmózgowia (droga czerwienno-rdzeniowa):</strong> odbiera informacje z kory i móżdżku, krzyżuje się natychmiast w śródmózgowiu i zstępuje do rdzenia, wywierając wpływ pobudzający na <em>zginacze dystalnych części kończyn</em>.
+        </li>
+      </ul>
+
+      <div class="card card-clinical">
+        <h4>Sztywność odmóżdżeniowa a sztywność z odkorowania</h4>
+        Różnicowanie poziomu uszkodzenia pnia mózgu ma fundamentalne znaczenie w stanach nagłych (skala śpiączki Glasgow):
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Parametr</th>
+                <th>Sztywność z Odkorowania (Decorticate)</th>
+                <th>Sztywność Odmóżdżeniowa (Decerebrate)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Poziom uszkodzenia</strong></td>
+                <td>Powyżej śródmózgowia (półkule mózgu, torebka wewnętrzna). Śródmózgowie i pień nienaruszone!</td>
+                <td>Poprzeczne uszkodzenie pnia <strong>pomiędzy wzgórkami górnymi a dolnymi śródmózgowia</strong> (poniżej jądra czerwiennego, powyżej jąder przedsionkowych)</td>
+              </tr>
+              <tr>
+                <td><strong>Kończyny górne</strong></td>
+                <td><strong>Zgięte w stawach łokciowych i nadgarstkowych</strong>, przywiedzione do tułowia (dzięki zachowanemu jądru czerwonemu i drodze czerwienno-rdzeniowej)</td>
+                <td><strong>Wyprostowane, w silnej pronacji</strong> („nawrócone”) i przywiedzione</td>
+              </tr>
+              <tr>
+                <td><strong>Kończyny dolne</strong></td>
+                <td>Wyprostowane, stopy zgięte podeszwowo</td>
+                <td><strong>Wyprostowane</strong>, silny skurcz mięśni antygrawitacyjnych, <em>opisthotonus</em></td>
+              </tr>
+              <tr>
+                <td><strong>Mechanizm patofizjologiczny</strong></td>
+                <td>Odcięcie korowej kontroli, ale zachowane śródmózgowiowe zginanie rąk</td>
+                <td>Zniszczenie jądra czerwiennego + odcięcie korowego napędu dla opuszkowego tworu siatkowatego $\to$ <strong>odhamowanie mostowego tworu siatkowatego i jądra Deitersa</strong> $\to$ potężna przewaga prostowników</td>
+              </tr>
+              <tr>
+                <td><strong>Rokowanie</strong></td>
+                <td>Poważne, ale lepsze niż odmóżdżenie</td>
+                <td>Krytyczne (bezpośrednie zagrożenie życia, wklinowanie pnia)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEKCJA 8: KORA RUCHOWA -->
+    <section id="sec-kora">
+      <h2 class="section-title">8. Kora ruchowa, etapy tworzenia ruchu i drogi piramidowe</h2>
+
+      <p>
+        Generowanie każdego uświadomionego ruchu dowolnego jest procesem wieloetapowym, wymagającym harmonijnej współpracy odległych struktur OUN:
+      </p>
+      <ol>
+        <li><strong>Faza planowania i motywacji (intencja):</strong> kora przedczołowa asocjacyjna (PFC) oraz układ limbiczny formułują cel działania na podstawie pamięci i motywacji.</li>
+        <li><strong>Faza programowania przestrzenno-czasowego:</strong>
+          <ul>
+            <li><em>Kora przedruchowa (PMA, pole 6):</em> planuje sekwencje pod wpływem bodźców zewnętrznych (wzrokowych, słuchowych). Zawiera <strong>neurony lustrzane</strong> aktywowane przy obserwowaniu czynności innych osób.</li>
+            <li><em>Dodatkowa kora ruchowa (SMA, pole 6):</em> programuje wyuczone, złożone serie ruchowe generowane wewnętrznie (np. gra na instrumencie) oraz koordynację obu rąk.</li>
+            <li><em>Jądra podstawy i neocerebellum (móżdżek boczny):</em> modelują parametry prędkości, siły i czasu trwania ruchu.</li>
+          </ul>
+        </li>
+        <li><strong>Faza wykonawcza (egzekucja):</strong> pierwszorzędowa kora ruchowa (M1, pole 4 Brodmanna w zakręcie przedśrodkowym) – wysyła właściwy sygnał wykonawczy drogami piramidowymi.</li>
+        <li><strong>Faza kontroli w czasie rzeczywistym:</strong> spinocerebellum (robak i strefa pośrednia) porównuje zamiar z kory z sygnałami proprioceptywnymi z obwodu i na bieżąco koryguje błędy.</li>
+      </ol>
+
+      <h3 class="subsection-title">Układ piramidowy: drogi korowo-rdzeniowe i korowo-jądrowe</h3>
+      <p>
+        Włókna drogi piramidowej biorą początek z komórek piramidowych warstwy V kory: w $30\%$ z pola 4 (M1, w tym olbrzymie komórki Betza), w $30\%$ z pola 6 (PMA/SMA) oraz w $40\%$ z kory somatosensorycznej (S1, zakręt zaśrodkowy):
+      </p>
+      <ul>
+        <li>
+          <strong>Droga korowo-rdzeniowa boczna (skrzyżowana):</strong> stanowi około <strong>$85\text{--}90\%$ włókien</strong>, które ulegają skrzyżowaniu w <em>skrzyżowaniu piramid</em> w dolnej części rdzenia przedłużonego. Biegnie w sznurze bocznym i unerwia motoneurony mięśni dystalnych kończyn odpowiedzialne za precyzyjne ruchy manipulacyjne (np. palce dłoni).
+        </li>
+        <li>
+          <strong>Droga korowo-rdzeniowa przednia (nieskrzyżowana w pniu):</strong> stanowi <strong>$10\text{--}15\%$ włókien</strong>. Schodzi w sznurze przednim i krzyżuje się dopiero na poziomie docelowego segmentu rdzenia przez spoidło białe. Unerwia mięśnie osiowe tułowia i proksymalne obręczy.
+        </li>
+        <li>
+          <strong>Droga korowo-jądrowa (korowo-opuszkowa):</strong> zaopatruje jądra ruchowe nerwów czaszkowych (III, IV, V, VI, VII, IX, X, XI, XII). Większość jąder zaopatrywana jest <em>obustronnie</em>. Wyjątek stanowi <strong>dolna część jądra n. VII (mięśnie dolnej połowy twarzy) oraz jądro n. XII (m. języka)</strong>, które otrzymują unerwienie wyłącznie kontralateralne.
+        </li>
+      </ul>
+    </section>
+
+    <!-- SEKCJA 9: JĄDRA PODSTAWY -->
+    <section id="sec-zwoje">
+      <h2 class="section-title">9. Jądra podstawy: pętle anatomiczne i patofizjologia</h2>
+
+      <p>
+        Jądra (zwoje) podstawy to podkorowe skupiska istoty szarej: <strong>prążkowie (striatum = jądro ogoniaste + skorupa)</strong>, <strong>gałka blada (część zewnętrzna GPe i wewnętrzna GPi)</strong>, <strong>istota czarna (część zbita SNc i siatkowata SNr)</strong> oraz <strong>jądro niskowzgórzowe (STN)</strong>.
+      </p>
+      <p>
+        Główną bramą wejściową do jąder podstawy jest <em>prążkowie</em> (odbiera pobudzenie glutaminergiczne z kory), a główną bramą wyjściową są <em>GPi oraz SNr</em>, które wywierają <strong>stałe, toniczne hamowanie GABA-ergiczne na wzgórze ruchowe (VA/VL)</strong>.
+      </p>
+
+      <!-- SVG SCHEMAT 4: JĄDRA PODSTAWY SZLAK BEZPOŚREDNI I POŚREDNI -->
+      <div class="svg-wrapper">
+        <svg viewBox="0 0 840 380" xmlns="http://www.w3.org/2000/svg">
+          <rect width="840" height="380" fill="#f8fafc" rx="10"/>
+          
+          <!-- Kora mózgowa góra -->
+          <rect x="220" y="20" width="400" height="45" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2" rx="8"/>
+          <text x="420" y="47" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">KORA RUCHOWA / PRZEDRUCHOWA</text>
+          
+          <!-- Prążkowie (Striatum) -->
+          <rect x="220" y="105" width="400" height="50" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="8"/>
+          <text x="420" y="135" font-family="sans-serif" font-size="14" font-weight="bold" fill="#92400e" text-anchor="middle">PRĄŻKOWIE (Skorupa + J. Ogoniaste)</text>
+          
+          <!-- Kora -> Prążkowie (Glu) -->
+          <line x1="420" y1="65" x2="420" y2="105" stroke="#15803d" stroke-width="3"/>
+          <text x="428" y="88" font-family="sans-serif" font-size="11" font-weight="bold" fill="#15803d">Glutaminian (+)</text>
+          
+          <!-- Istota czarna SNc (dopamina) po lewej -->
+          <rect x="30" y="105" width="140" height="50" fill="#f3e8ff" stroke="#7e22ce" stroke-width="2" rx="8"/>
+          <text x="100" y="130" font-family="sans-serif" font-size="11" font-weight="bold" fill="#581c87" text-anchor="middle">Istota Czarna (SNc)</text>
+          <text x="100" y="145" font-family="sans-serif" font-size="10" fill="#6b21a8" text-anchor="middle">DOPAMINA</text>
+          
+          <!-- Dopamina do D1 i D2 -->
+          <path d="M 170 120 L 220 120" stroke="#7e22ce" stroke-width="2.5" stroke-dasharray="3"/>
+          <text x="195" y="112" font-family="sans-serif" font-size="9" font-weight="bold" fill="#7e22ce">$D_1(+)/D_2(-)$</text>
+          
+          <!-- SZLAK BEZPOŚREDNI (Lewa strona) -->
+          <g transform="translate(180, 160)">
+            <rect x="0" y="10" width="160" height="30" fill="#dcfce7" stroke="#15803d" rx="6"/>
+            <text x="80" y="30" font-family="sans-serif" font-size="11" font-weight="bold" fill="#14532d" text-anchor="middle">Neurony $D_1$ (Pro-ruchowe)</text>
+            
+            <line x1="80" y1="40" x2="80" y2="100" stroke="#dc2626" stroke-width="3"/>
+            <text x="85" y="70" font-family="sans-serif" font-size="10" font-weight="bold" fill="#dc2626">GABA (-)</text>
+            
+            <rect x="0" y="100" width="160" height="40" fill="#fee2e2" stroke="#dc2626" rx="6"/>
+            <text x="80" y="125" font-family="sans-serif" font-size="11" font-weight="bold" fill="#7f1d1d" text-anchor="middle">GPi / SNr (Wyjście)</text>
+          </g>
+          
+          <!-- SZLAK POŚREDNI (Prawa strona) -->
+          <g transform="translate(500, 160)">
+            <rect x="0" y="10" width="160" height="30" fill="#ffedd5" stroke="#ea580c" rx="6"/>
+            <text x="80" y="30" font-family="sans-serif" font-size="11" font-weight="bold" fill="#7c2d12" text-anchor="middle">Neurony $D_2$ (Anty-ruchowe)</text>
+            
+            <line x1="80" y1="40" x2="80" y2="70" stroke="#dc2626" stroke-width="2.5"/>
+            <text x="85" y="58" font-family="sans-serif" font-size="9" fill="#dc2626">GABA (-)</text>
+            
+            <rect x="20" y="70" width="120" height="28" fill="#fee2e2" stroke="#dc2626" rx="6"/>
+            <text x="80" y="88" font-family="sans-serif" font-size="10" font-weight="bold" fill="#7f1d1d" text-anchor="middle">GPe (Zewnętrzna)</text>
+            
+            <line x1="80" y1="98" x2="80" y2="120" stroke="#dc2626" stroke-width="2.5"/>
+            <text x="85" y="112" font-family="sans-serif" font-size="9" fill="#dc2626">GABA (-)</text>
+            
+            <rect x="10" y="120" width="140" height="28" fill="#dbeafe" stroke="#2563eb" rx="6"/>
+            <text x="80" y="138" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e3a8a" text-anchor="middle">STN (Niskowzgórze)</text>
+            
+            <!-- STN pobudza GPi/SNr -->
+            <path d="M 10 134 L -160 134" stroke="#15803d" stroke-width="2.5"/>
+            <text x="-80" y="126" font-family="sans-serif" font-size="10" font-weight="bold" fill="#15803d">Glu (+)</text>
+          </g>
+          
+          <!-- Wzgórze ruchowe (VA/VL) -->
+          <rect x="260" y="320" width="320" height="40" fill="#f1f5f9" stroke="#475569" stroke-width="2" rx="6"/>
+          <text x="420" y="345" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">WZGÓRZE RUCHOWE (VA / VL)</text>
+          
+          <!-- GPi hamuje Wzgórze (Tonicznie) -->
+          <line x1="260" y1="300" x2="300" y2="320" stroke="#dc2626" stroke-width="3"/>
+          <text x="235" y="315" font-family="sans-serif" font-size="10" font-weight="bold" fill="#dc2626">Toniczne GABA (-)</text>
+          
+          <!-- Wzgórze do Kory (Pętla zwrotna Glu) -->
+          <path d="M 580 340 C 720 340 720 40 620 40" stroke="#15803d" stroke-width="3" fill="none"/>
+          <text x="730" y="190" font-family="sans-serif" font-size="11" font-weight="bold" fill="#15803d" transform="rotate(90 730 190)">Glutaminian (+) do Kory</text>
+        </svg>
+        <div class="svg-caption">Ryc. 4. Obwody funkcjonalne jąder podstawy: szlak bezpośredni (odhamowujący wzgórze $\to$ inicjacja ruchu) oraz szlak pośredni (wzmacniający hamowanie wzgórza $\to$ tłumienie ruchów niepożądanych).</div>
+      </div>
+
+      <div class="card card-key">
+        <h4>Dualizm działania dopaminy z istoty czarnej (SNc)</h4>
+        Dopamina uwolniona w prążkowiu wywiera zbieżny efekt pro-kinetyczny za pośrednictwem dwóch różnych receptorów metabotropowych:
+        <ul>
+          <li><strong>Receptory $D_1$ (sprzężone z białkiem $G_{s/olf}$):</strong> aktywują cyklazę adenylanową, zwiększają stężenie cAMP i <em>pobudzają neurony szlaku bezpośredniego</em> $\to$ nasilenie hamowania GPi $\to$ <strong>odhamowanie wzgórza (disinhibition)</strong> $\to$ wzbudzenie kory $\to$ ułatwienie ruchu!</li>
+          <li><strong>Receptory $D_2$ (sprzężone z białkiem $G_i$):</strong> hamują cyklazę adenylanową, zmniejszają cAMP i <em>hamują neurony szlaku pośredniego</em> $\to$ osłabienie hamowania GPe $\to$ wygaszenie pobudzenia STN $\to$ spadek aktywności GPi $\to$ odhamowanie wzgórza $\to$ ułatwienie ruchu!</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection-title">Pętla skorupy vs pętla jądra ogoniastego</h3>
+      <ul>
+        <li><strong>Pętla skorupy (ruchowa):</strong> kora przedruchowa/SMA $\to$ skorupa $\to$ GPi $\to$ wzgórze VA/VL $\to$ kora M1. Odpowiada za wykonywanie wyuczonych automatyzmów motorycznych (np. pisanie na klawiaturze, jazda na rowerze, operowanie skalpelem).</li>
+        <li><strong>Pętla jądra ogoniastego (poznawczo-wykonawcza):</strong> kora przedczołowa asocjacyjna $\to$ jądro ogoniaste $\to$ GPi/SNr $\to$ wzgórze DM/VA $\to$ kora przedczołowa. Odpowiada za poznawcze planowanie sekwencji ruchów w kontekście celów strategicznych i adaptację do zmieniających się warunków.</li>
+      </ul>
+
+      <div class="card card-clinical">
+        <h4>Patofizjologia kliniczna jąder podstawy</h4>
+        <ul>
+          <li>
+            <strong>Choroba Parkinsona (zespół hipokinetyczno-hipertoniczny):</strong> selektywna degeneracja neuronów dopaminergicznych w części zbitej istoty czarnej ($>70\%$ ubytku). Brak dopaminy osłabia szlak bezpośredni ($D_1$) i odhamowuje szlak pośredni ($D_2$). Efektem jest potężne, niekontrolowane hamowanie wzgórza ruchowego przez GPi.
+            <br><em>Objawy osiowe (triada):</em> <strong>bradykinezja</strong> (spowolnienie ruchów) / akinezja (trudność w inicjacji), <strong>sztywność mięśniowa typu „koła zębatego”</strong> lub „rury ołowianej” (stały wzmożony tonus plastyczny), <strong>drżenie spoczynkowe</strong> ($4\text{--}6\ \mathrm{Hz}$, „kręcenie pigułek”), niestabilność postawy i chód drobnymi kroczkami (propulsja).
+          </li>
+          <li>
+            <strong>Pląsawica Huntingtona (zespół hiperkinetyczno-hipotoniczny):</strong> choroba genetyczna (autosomalna dominująca, ekspansja powtórzeń trinukleotydowych CAG w genie huntingtyny). Dochodzi do przedwczesnego obumarcia neuronów GABA-ergicznych prążkowia należących do <em>szlaku pośredniego</em>. STN traci kontrolę, GPi przestaje hamować wzgórze $\to$ wzgórze bombarduje korę impulsami.
+            <br><em>Objawy:</em> mimowolne, nieprzewidywalne, taneczne ruchy pląsawicze (chorea), hipotonia, otępienie i zaburzenia afektywne.
+          </li>
+          <li>
+            <strong>Hemibalizm:</strong> uszkodzenie (najczęściej naczyniowe, udarowe) <strong>jądra niskowzgórzowego (STN)</strong>. Wywołuje gwałtowne, nieskoordynowane, zamaszyste ruchy wyrzutowe proksymalnych części kończyn po stronie przeciwległej do ogniska.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SEKCJA 10: MÓŻDŻEK -->
+    <section id="sec-mozdzek">
+      <h2 class="section-title">10. Organizacja, mikropętle i czynności móżdżku</h2>
+
+      <p>
+        Móżdżek stanowi zaledwie $10\%$ objętości mózgowia, ale zawiera ponad $50\%$ wszystkich neuronów OUN. Pełni funkcję zaawansowanego procesora komparatorowego – porównuje zamiar ruchu (docierający z kory) z jego rzeczywistą realizacją w czasie (docierającą ze szlaków rdzeniowo-móżdżkowych) i wylicza poprawki korygujące.
+      </p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Część Czynnościowa</th>
+              <th>Odpowiednik Filogenetyczny</th>
+              <th>Struktury Anatomiczne</th>
+              <th>Jądra Głębokie</th>
+              <th>Kluczowe Funkcje</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Przedsionkowy</strong><br>(Vestibulocerebellum)</td>
+              <td>Archicerebellum<br>(najstarszy)</td>
+              <td>Płat kłaczkowo-grudkowy (lobus flocculonodularis)</td>
+              <td>Jądra przedsionkowe (w pniu)</td>
+              <td>Równowaga statyczna i dynamiczna, koordynacja ruchów gałek ocznych i głowy (kontrola VOR)</td>
+            </tr>
+            <tr>
+              <td><strong>Rdzeniowy</strong><br>(Spinocerebellum)</td>
+              <td>Paleocerebellum<br>(pośredni)</td>
+              <td>Robak (vermis) oraz strefa przyrobakowa (pośrednia półkul)</td>
+              <td>Jądro wierzchu (fastigii) oraz jądra wsunięte (emboliforme + globosum)</td>
+              <td>Kontrola napięcia mięśniowego; robak steruje mięśniami osiowymi tułowia i chodem, strefa pośrednia dystalnymi mięśniami kończyn</td>
+            </tr>
+            <tr>
+              <td><strong>Mostowy / Korowy</strong><br>(Cerebrocerebellum)</td>
+              <td>Neocerebellum<br>(najmłodszy)</td>
+              <td>Boczne części półkul móżdżku</td>
+              <td>Jądro zębate (nucleus dentatus)</td>
+              <td>Planowanie i precyzyjne odmierzanie czasu (timing) złożonych, szybkich ruchów dowolnych, uczenie motoryczne</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- SVG SCHEMAT 5: KORA MÓŻDŻKU I LTD -->
+      <div class="svg-wrapper">
+        <svg viewBox="0 0 840 380" xmlns="http://www.w3.org/2000/svg">
+          <rect width="840" height="380" fill="#f8fafc" rx="10"/>
+          
+          <!-- Warstwy kory móżdżku - tła -->
+          <rect x="40" y="30" width="460" height="90" fill="#f1f5f9" stroke="#cbd5e1" rx="4"/>
+          <text x="50" y="50" font-family="sans-serif" font-size="10" font-weight="bold" fill="#64748b">WARSTWA DROBINOWA (Molecularis)</text>
+          
+          <rect x="40" y="120" width="460" height="60" fill="#fef2f2" stroke="#cbd5e1" rx="4"/>
+          <text x="50" y="140" font-family="sans-serif" font-size="10" font-weight="bold" fill="#991b1b">WARSTWA KOMÓREK PURKINJEGO</text>
+          
+          <rect x="40" y="180" width="460" height="90" fill="#f0fdf4" stroke="#cbd5e1" rx="4"/>
+          <text x="50" y="200" font-family="sans-serif" font-size="10" font-weight="bold" fill="#166534">WARSTWA ZIARNISTA (Granularis)</text>
+          
+          <!-- Komórka Purkinjego -->
+          <circle cx="280" cy="150" r="16" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+          <text x="280" y="154" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">P</text>
+          <!-- Rozbudowane drzewo dendrytyczne w warstwie drobinowej -->
+          <path d="M 280 134 L 280 50 M 280 100 L 230 45 M 280 100 L 330 45 M 280 75 L 255 45 M 280 75 L 305 45" stroke="#ef4444" stroke-width="2.5"/>
+          
+          <!-- Akson Purkinjego (JEDYNE WYJŚCIE Z KORY - GABA) -->
+          <path d="M 280 166 L 280 300" stroke="#b91c1c" stroke-width="3"/>
+          <text x="290" y="280" font-family="sans-serif" font-size="11" font-weight="bold" fill="#b91c1c">GABA (-)</text>
+          
+          <!-- Jądro głębokie móżdżku na dole -->
+          <rect x="200" y="300" width="160" height="40" fill="#1e293b" rx="6"/>
+          <text x="280" y="325" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Jądro Głębokie Móżdżku</text>
+          
+          <!-- Włókno pnące (Climbing fiber) z Oliwki -->
+          <path d="M 100 350 L 100 150 Q 180 140 270 145 M 270 145 C 275 110 270 80 280 60" stroke="#7c3aed" stroke-width="2.5" fill="none"/>
+          <text x="105" y="340" font-family="sans-serif" font-size="10" font-weight="bold" fill="#6d28d9">Włókno Pnące (Dolna Oliwka)</text>
+          <text x="140" y="130" font-family="sans-serif" font-size="9" fill="#6d28d9">Wyładowanie złożone (Complex Spike)</text>
+          
+          <!-- Włókno kiciaste (Mossy fiber) -->
+          <path d="M 450 350 L 450 230 L 390 230" stroke="#059669" stroke-width="2.5" fill="none"/>
+          <text x="455" y="340" font-family="sans-serif" font-size="10" font-weight="bold" fill="#047857">Włókno Kiciaste (Rdzeń / Most)</text>
+          
+          <!-- Komórka ziarnista i kłębek -->
+          <circle cx="380" cy="230" r="10" fill="#10b981"/>
+          <text x="380" y="234" font-family="sans-serif" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">Z</text>
+          
+          <!-- Akson ziarnistej wstępujący i włókno równoległe -->
+          <path d="M 380 220 L 380 70 M 160 70 L 460 70" stroke="#059669" stroke-width="2"/>
+          <text x="410" y="65" font-family="sans-serif" font-size="9" font-weight="bold" fill="#047857">Włókno równoległe (Glu)</text>
+          
+          <!-- Panel opisu neuroplastyczności po prawej -->
+          <rect x="520" y="30" width="300" height="310" fill="#ffffff" stroke="#cbd5e1" rx="8"/>
+          <text x="535" y="60" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f2b48">Mikroarchitektura i Plastyczność LTD:</text>
+          
+          <text x="535" y="85" font-family="sans-serif" font-size="10" font-weight="bold" fill="#b91c1c">1. Komórka Purkinjego:</text>
+          <text x="535" y="100" font-family="sans-serif" font-size="10" fill="#334155">• Jedyny eferent kory (hamowanie GABA)</text>
+          <text x="535" y="115" font-family="sans-serif" font-size="10" fill="#334155">• Hamuje tonicznie jądra głębokie móżdżku</text>
+          
+          <text x="535" y="140" font-family="sans-serif" font-size="10" font-weight="bold" fill="#047857">2. Włókna Kiciaste $\to$ Ziarniste:</text>
+          <text x="535" y="155" font-family="sans-serif" font-size="10" fill="#334155">• Aksony ziarnistych tworzą włókna równoległe</text>
+          <text x="535" y="170" font-family="sans-serif" font-size="10" fill="#334155">• 1 Purkinje odbiera sygnał z 200 000 włókien!</text>
+          <text x="535" y="185" font-family="sans-serif" font-size="10" fill="#334155">• Wywołują wyładowania proste (Simple Spikes)</text>
+          
+          <text x="535" y="210" font-family="sans-serif" font-size="10" font-weight="bold" fill="#6d28d9">3. Włókna Pnące (Z Oliwki Dolnej):</text>
+          <text x="535" y="225" font-family="sans-serif" font-size="10" fill="#334155">• 1 włókno pnące owija tylko 1 komórkę Purkinjego</text>
+          <text x="535" y="240" font-family="sans-serif" font-size="10" fill="#334155">• Przesyła „sygnał błędu wykonania ruchu”</text>
+          
+          <text x="535" y="265" font-family="sans-serif" font-size="10" font-weight="bold" fill="#c2410c">4. Uczenie Motoryczne (LTD):</text>
+          <text x="535" y="280" font-family="sans-serif" font-size="10" fill="#334155">Równoczesna aktywacja przez włókno pnące</text>
+          <text x="535" y="295" font-family="sans-serif" font-size="10" fill="#334155">i równoległe wywołuje <strong>Long-Term Depression</strong></text>
+          <text x="535" y="310" font-family="sans-serif" font-size="10" fill="#334155">(internalizację receptorów AMPA na Purkinje).</text>
+        </svg>
+        <div class="svg-caption">Ryc. 5. Obwód neuronalny kory móżdżku: konwergencja włókien kiciastych i pnących na komórce Purkinjego oraz podłoże molekularne długotrwałego tłumienia synaptycznego (LTD).</div>
+      </div>
+
+      <div class="card card-clinical">
+        <h4>Zespół móżdżkowy (objawy uszkodzenia móżdżku)</h4>
+        W przeciwieństwie do uszkodzeń kory mózgowej, <strong>uszkodzenie półkuli móżdżku daje objawy po tej samej stronie ciała (tożstronnie / ipsilateralnie)</strong>, ze względu na podwójne skrzyżowanie dróg móżdżkowo-korowo-rdzeniowych:
+        <ul>
+          <li><strong>Ataksja (niezborność ruchowa):</strong> chód na szerokiej podstawie („marynarski”), chwiejny, niepewny, niemożność wykonania próby stania ze złączonymi stopami (niezależnie od otwarcia czy zamknięcia oczu – odróżnienie od ataksji tylnosznurowej!).</li>
+          <li><strong>Dysmetria (hipermetria / hipometria):</strong> niezdolność do prawidłowego wyskalowania zakresu i odległości ruchu – pacjent „przestrzeliwuje” cel w próbie palec-nos lub pięta-kolano.</li>
+          <li><strong>Dysdiadochokineza (adiadochokineza):</strong> niemożność wykonywania szybkich ruchów naprzemiennych (np. gwałtownej supinacji i pronacji dłoni).</li>
+          <li><strong>Drżenie zamiarowe (intention tremor):</strong> drżenie o częstotliwości $3\text{--}5\ \mathrm{Hz}$, które <em>nasila się pod koniec celowanego ruchu</em> (w przeciwieństwie do parkinsonowskiego drżenia spoczynkowego, które przy ruchu zanika!).</li>
+          <li><strong>Dyzartria móżdżkowa (mowa skandowana):</strong> mowa spowolniała, wybuchowa, poszarpana na sylaby z nieprawidłowym akcentowaniem.</li>
+          <li><strong>Hipotonia mięśniowa i odruchy wahadłowe (pendular reflexes):</strong> osłabienie tonusu mięśniowego; po uderzeniu w więzadło rzepki podudzie wykonuje serię swobodnych wahadłowych oscylacji z powodu braku wyhamowania odruchu.</li>
+          <li><strong>Wpływ etanolu i leków nasennych:</strong> komórki Purkinjego wykazują najwyższą w mózgowiu gęstość podjednostek $\alpha_6$ receptora $\mathrm{GABA_A}$. Spożycie alkoholu lub benzodiazepin gwałtownie nasila przewodnictwo chlorkowe komórek Purkinjego, imitując ostry stan uszkodzenia móżdżku (chwiejny chód, bełkotliwa mowa, dysmetria).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SEKCJA 11: QUIZ SPRAWDZAJĄCY WIEDZĘ -->
+    <section id="sec-quiz">
+      <h2 class="section-title">11. Interaktywny Sprawdzian Wiedzy Seminaryjnej</h2>
+      <p>Sprawdź swoje przygotowanie do seminarium i kolokwium, odpowiadając na poniższe pytania kliniczno-fizjologiczne:</p>
+
+      <div class="quiz-container">
+        
+        <!-- Pytanie 1 -->
+        <div class="quiz-question" id="q1">
+          <p class="q-text">1. Wskaż, które z poniższych zjawisk leży u podstaw zwiotczenia mięśnia w odwróconym odruchu na rozciąganie:</p>
+          <div class="quiz-options">
+            <button onclick="checkAnswer('q1', 1, false)">A. Pobudzenie motoneuronu $\gamma$ przez włókna Ia</button>
+            <button onclick="checkAnswer('q1', 2, true)">B. Pobudzenie interneuronu glicynergicznego Ib przez narząd ścięgnisty Golgiego</button>
+            <button onclick="checkAnswer('q1', 3, false)">C. Zablokowanie receptorów nikotynowych na miocytach ekstrafuzalnych</button>
+            <button onclick="checkAnswer('q1', 4, false)">D. Wychwyt zwrotny acetylocholiny przez komórki Renshawa</button>
+          </div>
+          <div class="quiz-feedback" id="q1-fb"></div>
+        </div>
+
+        <!-- Pytanie 2 -->
+        <div class="quiz-question" id="q2">
+          <p class="q-text">2. Dlaczego mechaniczne odchylenie stereocyliów w stronę kinetocylium w komórkach rzęsatych ucha wewnętrznego wywołuje depolaryzację błony?</p>
+          <div class="quiz-options">
+            <button onclick="checkAnswer('q2', 1, false)">A. Endolimfa zawiera wysokie stężenie $Na^+$ i potencjał $-80\ \mathrm{mV}$</button>
+            <button onclick="checkAnswer('q2', 2, false)">B. Dochodzi do aktywacji pompy $Na^+/K^+$-ATPazy w rzęskach</button>
+            <button onclick="checkAnswer('q2', 3, true)">C. Endolimfa bogata w $K^+$ ma potencjał $+80\ \mathrm{mV}$, co tworzy potężny dokomórkowy gradient elektryczny dla potasu</button>
+            <button onclick="checkAnswer('q2', 4, false)">D. Otwierają się wyłącznie kanały chlorkowe aktywowane napięciem</button>
+          </div>
+          <div class="quiz-feedback" id="q2-fb"></div>
+        </div>
+
+        <!-- Pytanie 3 -->
+        <div class="quiz-question" id="q3">
+          <p class="q-text">3. U pacjenta po udarze stwierdzono: wygórowane odruchy głębokie, objaw Babińskiego oraz wzmożone napięcie o typie „scyzorykowym”. Obraz ten wskazuje jednoznacznie na:</p>
+          <div class="quiz-options">
+            <button onclick="checkAnswer('q3', 1, false)">A. Uszkodzenie dolnego motoneuronu (rogi przednie rdzenia)</button>
+            <button onclick="checkAnswer('q3', 2, true)">B. Zespół uszkodzenia górnego motoneuronu (drogi piramidowej)</button>
+            <button onclick="checkAnswer('q3', 3, false)">C. Izolowane uszkodzenie narządów ścięgnistych Golgiego</button>
+            <button onclick="checkAnswer('q3', 4, false)">D. Toksyczne porażenie komórek Renshawa przez strychninę</button>
+          </div>
+          <div class="quiz-feedback" id="q3-fb"></div>
+        </div>
+
+        <!-- Pytanie 4 -->
+        <div class="quiz-question" id="q4">
+          <p class="q-text">4. Wskaż bezpośrednią rolę dopaminy działającej na receptory $D_1$ w prążkowiu:</p>
+          <div class="quiz-options">
+            <button onclick="checkAnswer('q4', 1, true)">A. Pobudzenie szlaku bezpośredniego, co prowadzi do odhamowania wzgórza ruchowego i ułatwienia ruchu</button>
+            <button onclick="checkAnswer('q4', 2, false)">B. Zahamowanie szlaku bezpośredniego i aktywacja jądra niskowzgórzowego (STN)</button>
+            <button onclick="checkAnswer('q4', 3, false)">C. Bezpośrednie zablokowanie wydzielania glutaminianu w korze ruchowej</button>
+            <button onclick="checkAnswer('q4', 4, false)">D. Wywołanie hiperpolaryzacji komórek Purkinjego w móżdżku</button>
+          </div>
+          <div class="quiz-feedback" id="q4-fb"></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  function checkAnswer(questionId, optionIndex, isCorrect) {
+    const feedbackBox = document.getElementById(questionId + '-fb');
+    if (isCorrect) {
+      feedbackBox.className = 'quiz-feedback correct';
+      feedbackBox.innerText = 'Odpowiedź prawidłowa! Doskonałe zrozumienie mechanizmu biofizycznego.';
+    } else {
+      feedbackBox.className = 'quiz-feedback incorrect';
+      feedbackBox.innerText = 'Błędna odpowiedź. Przeanalizuj ponownie powyższe tabele i schematy procesowe.';
+    }
+  }
+</script>
+
+</body>
+</html>
