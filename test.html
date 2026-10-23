@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regulacja Napięcia Mięśniowego i Kontrola Czynności Ruchowych - Kompendium Fizjologii Medycznej</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #2563eb;
+      --primary-subtle: #eff6ff;
+      --secondary: #0f766e;
+      --secondary-light: #0d9488;
+      --secondary-subtle: #f0fdfa;
+      --accent: #854d0e;
+      --accent-subtle: #fefce8;
+      --danger: #b91c1c;
+      --danger-subtle: #fef2f2;
+      --warning: #c2410c;
+      --warning-subtle: #fff7ed;
+      --purple: #6b21a8;
+      --purple-subtle: #faf5ff;
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+      --bg-page: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #cbd5e1;
+      --border-subtle: #e2e8f0;
+      --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-dark);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1e40af 100%);
+      color: #ffffff;
+      padding: 40px 24px 30px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .header-container { max-width: 1200px; margin: 0 auto; }
+
+    .badge-top {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      max-width: 950px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .nav-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.12);
+      color: #f8fafc;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-btn:hover { background: #ffffff; color: var(--primary); transform: translateY(-1px); }
+
+    .print-btn {
+      background: #10b981;
+      color: white;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .print-btn:hover { background: #059669; color: white; }
+
+    main {
+      max-width: 1200px;
+      margin: 32px auto 60px;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .module-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      scroll-margin-top: 24px;
+    }
+
+    .module-header {
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: #fdfdfe;
+    }
+
+    .module-header.p-blue { border-left: 6px solid var(--primary-light); }
+    .module-header.p-teal { border-left: 6px solid var(--secondary); }
+    .module-header.p-purple { border-left: 6px solid var(--purple); }
+    .module-header.p-amber { border-left: 6px solid var(--accent); }
+    .module-header.p-rose { border-left: 6px solid var(--danger); }
+
+    .module-title-wrap { display: flex; align-items: center; gap: 12px; }
+
+    .module-num {
+      background: var(--text-dark);
+      color: white;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .module-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: -0.01em;
+    }
+
+    .module-body { padding: 28px; display: flex; flex-direction: column; gap: 24px; }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 8px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 2px solid var(--primary-subtle);
+      padding-bottom: 6px;
+    }
+
+    p { color: #334155; text-align: justify; margin-bottom: 8px; }
+    ul, ol { margin-left: 20px; color: #334155; display: flex; flex-direction: column; gap: 6px; }
+    li strong { color: #0f172a; }
+
+    /* CALLOUTS Z PODZIAŁEM NA KLINIKĘ I FIZJOLOGIĘ */
+    .callout {
+      padding: 18px 22px;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      border-left: 5px solid;
+      margin: 14px 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-callout {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .badge-fizjo { background: #1e3a8a; color: #ffffff; }
+    .badge-klinika { background: #b91c1c; color: #ffffff; }
+
+    .callout-blue { background-color: var(--primary-subtle); border-color: var(--primary-light); color: #1e3a8a; }
+    .callout-teal { background-color: var(--secondary-subtle); border-color: var(--secondary); color: #0f766e; }
+    .callout-amber { background-color: var(--accent-subtle); border-color: var(--accent); color: #713f12; }
+    .callout-rose { background-color: var(--danger-subtle); border-color: var(--danger); color: #991b1b; }
+    .callout-purple { background-color: var(--purple-subtle); border-color: var(--purple); color: #581c87; }
+
+    /* Tabele */
+    .table-container {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      margin: 16px 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; text-align: left; }
+    thead { background: #f1f5f9; color: #1e293b; font-weight: 700; border-bottom: 2px solid var(--border-color); }
+    th, td { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); vertical-align: top; }
+    tbody tr:nth-child(even) { background-color: #f8fafc; }
+    tbody tr:hover { background-color: #f1f5f9; }
+
+    /* Układ kart porównawczych */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+    @media (max-width: 850px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    .sub-card {
+      background: #f8fafc;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+
+    .sub-card-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* KONTENER GRAFIK SVG */
+    .diagram-wrapper {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin: 18px 0;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .diagram-caption {
+      margin-top: 14px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.45;
+    }
+
+    svg { max-width: 100%; height: auto; font-family: inherit; }
+
+    .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.82rem; font-weight: 600; }
+    .tag-blue { background: #dbeafe; color: #1e40af; }
+    .tag-green { background: #dcfce7; color: #166534; }
+    .tag-red { background: #fee2e2; color: #991b1b; }
+    .tag-purple { background: #f3e8ff; color: #6b21a8; }
+    .tag-yellow { background: #fef3c7; color: #92400e; }
+
+    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 30px 20px; font-size: 0.88rem; }
+
+    @media print {
+      body { background-color: #ffffff; color: #000000; font-size: 11pt; }
+      header { background: none; color: #000000; padding: 0 0 15px; border-bottom: 2px solid #000000; }
+      .nav-buttons, .print-btn { display: none !important; }
+      main { max-width: 100%; margin: 10px 0; padding: 0; gap: 16px; }
+      .module-card { box-shadow: none; border: 1px solid #cccccc; break-inside: avoid; margin-bottom: 20px; }
+      .diagram-wrapper { break-inside: avoid; border: 1px solid #aaaaaa; }
+      @page { margin: 15mm; size: A4 portrait; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <span class="badge-top">Fizjologia Człowieka • Blok Neurofizjologii Klinicznej</span>
+      <h1>Tydzień 4: Regulacja Napięcia Mięśniowego i Kontrola Ruchu</h1>
+      <p class="subtitle">
+        Kompleksowe, zintegrowane opracowanie akademickie: odruchy rdzeniowe, mechanizmy propriocepcji, ponadrdzeniowe ośrodki pnia mózgu, układ przedsionkowy, kora ruchowa, pętle jąder podstawy oraz organizacja neuronalna móżdżku.
+      </p>
+      <div class="nav-buttons">
+        <a href="#modul-1" class="nav-btn">1. Unerwienie & Odruchy Rdzeniowe</a>
+        <a href="#modul-2" class="nav-btn">2. Aparat Przedsionkowy & Równowaga</a>
+        <a href="#modul-3" class="nav-btn">3. Kontrola Ruchu przez Pień Mózgu</a>
+        <a href="#modul-4" class="nav-btn">4. Kora Ruchowa & Drogi Zstępujące</a>
+        <a href="#modul-5" class="nav-btn">5. Jądra Podstawy (Pętla Ruchowa)</a>
+        <a href="#modul-6" class="nav-btn">6. Móżdżek & Koordynacja Ruchowa</a>
+        <button class="nav-btn print-btn" onclick="window.print()">🖨️ Zapisz jako PDF / Drukuj</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- MODUŁ 1 -->
+    <section class="module-card" id="modul-1">
+      <div class="module-header p-blue">
+        <div class="module-title-wrap">
+          <span class="module-num">1</span>
+          <h2 class="module-title">Receptory Mięśniowe, Motoneurony i Odruchy Rdzeniowe</h2>
+        </div>
+        <span class="tag tag-blue">Poziom rdzeniowy</span>
+      </div>
+
+      <div class="module-body">
+        
+        <h3>1. Czuciowe i Ruchowe Unerwienie Mięśni Szkieletowych</h3>
+        <p>Mięsień szkieletowy składa się z dwóch odrębnych czynnościowo populacji włókien mięśniowych:</p>
+        <div class="grid-2">
+          <div class="sub-card">
+            <div class="sub-card-title">Włókna ekstrafuzalne (robocze)</div>
+            <p>Stanowią przeważającą masę mięśnia i generują właściwą siłę mechaniczną. Są ułożone równolegle do wrzecionek.</p>
+            <ul>
+              <li><strong>Unerwienie ruchowe:</strong> <strong>Motoneurony alfa (&alpha;)</strong> o średnicy aksonu 12–20 &mu;m i prędkości przewodzenia 70–120 m/s (włókna typu A&alpha;).</li>
+              <li><strong>Jednostka motoryczna:</strong> Pojedynczy motoneuron &alpha; wraz ze wszystkimi zaopatrywanymi przez siebie komórkami mięśniowymi (miocytami).</li>
+            </ul>
+          </div>
+
+          <div class="sub-card">
+            <div class="sub-card-title">Włókna intrafuzalne (wrzecionowe)</div>
+            <p>Zmodyfikowane, wyspecjalizowane włókna mięśniowe wchodzące w skład wrzecionka nerwowo-mięśniowego. Mają elementy kurczliwe tylko na obu biegunach; centralna część jest niekurczliwa i otoczona receptorami czuciowymi.</p>
+            <ul>
+              <li><strong>Unerwienie ruchowe:</strong> <strong>Motoneurony gamma (&gamma;)</strong> (włókna A&gamma;, &empty; 3–6 &mu;m, v = 15–40 m/s), zaopatrujące kurczliwe bieguny wrzecionka.</li>
+              <li><strong>Unerwienie beta (&beta;):</strong> Włókna koaktywujące jednocześnie włókna ekstra- i intrafuzalne.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Receptor</th>
+                <th>Lokalizacja i układ</th>
+                <th>Włókna dośrodkowe (aferentne)</th>
+                <th>Główny bodziec</th>
+                <th>Rola fizjologiczna</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Wrzecionko nerwowo-mięśniowe</strong></td>
+                <td>Równolegle do włókien ekstrafuzalnych; torebka łącznotkankowa</td>
+                <td>
+                  <strong>Typ Ia</strong> (pierwotne, pierścieniowo-spiralne, v = 70–120 m/s)<br>
+                  <strong>Typ II</strong> (wtórne, gałązkowate / bukietowate, v = 30–70 m/s)
+                </td>
+                <td>Zmiana długości mięśnia (&Delta;L) oraz prędkość zmiany długości (dL/dt)</td>
+                <td>Detektor rozciągnięcia; zapoczątkowuje odruch na rozciąganie, stabilizuje długość mięśnia</td>
+              </tr>
+              <tr>
+                <td><strong>Narząd ścięgnisty Golgiego (GTO)</strong></td>
+                <td>Szeregowo na granicy brzuśca mięśniowego i ścięgna; włókna kolagenowe</td>
+                <td><strong>Typ Ib</strong> (zmielinizowane, v = 70–110 m/s)</td>
+                <td>Napięcie i siła skurczu mięśnia (szczególnie wrażliwy na aktywny skurcz)</td>
+                <td>Detektor siły skurczu; hamowanie autogenne, ochrona aparatu mięśniowo-ścięgnistego</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2. Motoneurony Rdzenia Kręgowego i Komórki Renshawa</h3>
+        <p>W rogach przednich istoty szarej rdzenia kręgowego zgrupowane są ciała motoneuronów somatycznych. Ich czynność jest precyzyjnie modulowana przez wewnętrzne pętle sprzężenia zwrotnego.</p>
+
+        <div class="callout callout-purple">
+          <div class="callout-title">
+            <span class="badge-callout badge-fizjo">Fizjologia</span>
+            ⚡ Komórki Renshawa – Mechanizm Hamowania Zwrotnego (Recurrent Inhibition)
+          </div>
+          <p>Akson motoneuronu &alpha;, opuszczając róg przedni, oddaje bocznicę powrotną (kolaterale aksonalną), która tworzy pobudzającą synapsę cholinergiczną (receptory nikotynowe) z <strong>komórką Renshawa</strong> (interneuronem hamującym).</p>
+          <ul>
+            <li><strong>Neuroprzekaźnik:</strong> Komórka Renshawa uwalnia <strong>glicynę</strong> (neuroprzekaźnik hamujący), która działa na receptory glicynowe (sprzężone z kanałem chlorkowym Cl<sup>-</sup>) na ciele tego samego motoneuronu &alpha; oraz motoneuronów sąsiednich.</li>
+            <li><strong>Efekt fizjologiczny:</strong> Ogranicza maksymalną częstotliwość wyładowań motoneuronu, zapobiega zjawisku „rozbiegania się” pobudzenia i wygasza słabsze pobudzenia w sąsiednich jednostkach (hamowanie oboczne), co dramatycznie zwiększa ostrość i precyzję kontroli motorycznej.</li>
+            <li><strong>Korelacja toksykologiczna:</strong> <em>T
