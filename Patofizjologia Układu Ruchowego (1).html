@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patofizjologia Układu Ruchowego – Interaktywne Repetytorium Q&amp;A</title>
+  <style>
+    :root {
+      --primary: #0f766e;
+      --primary-light: #f0fdfa;
+      --primary-dark: #115e59;
+      --secondary: #0369a1;
+      --accent-warm: #b45309;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #cbd5e1;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.05);
+      --radius-card: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    /* Nagłówek główny */
+    header.hero {
+      background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
+      color: #ffffff;
+      padding: 32px 28px;
+      border-radius: var(--radius-card);
+      margin-bottom: 24px;
+      box-shadow: 0 10px 15px -3px rgba(15, 118, 110, 0.25);
+    }
+
+    header.hero h1 {
+      font-size: 1.95rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    header.hero p {
+      font-size: 1rem;
+      color: #ccfbf1;
+      max-width: 820px;
+    }
+
+    .badge-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Pasek narzędziowy: Przyciski rozwiń/zwiń + Szukajka */
+    .toolbar-sticky {
+      position: sticky;
+      top: 12px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-card);
+      padding: 12px 18px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background-color: #ffffff;
+      color: var(--primary-dark);
+      border: 1.5px solid var(--primary);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      border-color: #94a3b8;
+      color: #334155;
+    }
+
+    .btn-secondary:hover {
+      background-color: #64748b;
+      color: #ffffff;
+      border-color: #64748b;
+    }
+
+    .search-box {
+      flex: 1 1 240px;
+      max-width: 380px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+    }
+
+    /* Nawigacja modułowa */
+    .module-nav {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-card);
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .module-nav-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .module-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      background: #f1f5f9;
+      color: #334155;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+
+    .chip:hover {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    /* Moduły */
+    .module-header {
+      margin: 36px 0 16px 0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #cbd5e1;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .module-header h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .module-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* KARTY PYTAŃ JAKO INTERAKTYWNY AKORDEON (<details.card-qa>) */
+    details.card-qa {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-card);
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    details.card-qa[open] {
+      box-shadow: var(--shadow-md);
+      border-color: #94a3b8;
+    }
+
+    summary.card-summary-header {
+      padding: 16px 20px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1e293b;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #ffffff;
+      user-select: none;
+      transition: background-color 0.15s ease;
+    }
+
+    summary.card-summary-header::-webkit-details-marker {
+      display: none;
+    }
+
+    summary.card-summary-header:hover {
+      background-color: #f8fafc;
+    }
+
+    details.card-qa[open] summary.card-summary-header {
+      border-bottom: 1px solid #e2e8f0;
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    .q-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .q-badge {
+      background: var(--primary);
+      color: white;
+      font-size: 0.78rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    details.card-qa[open] .q-badge {
+      background: var(--primary-dark);
+    }
+
+    .accordion-indicator {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: #ffffff;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: transform 0.2s ease;
+    }
+
+    details.card-qa[open] .accordion-indicator {
+      transform: rotate(180deg);
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    /* Zawartość rozwiniętej karty */
+    .card-body {
+      padding: 20px 22px;
+    }
+
+    .quick-answer {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: #0f172a;
+      background: #f1f5f9;
+      border-left: 4px solid var(--primary);
+      padding: 12px 16px;
+      margin-bottom: 18px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .section-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      color: #64748b;
+      margin: 16px 0 6px 0;
+      display: block;
+    }
+
+    /* Ramki analogii (.callout-analogy) */
+    .callout-analogy {
+      background-color: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-left: 4px solid #0284c7;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      margin: 12px 0;
+      font-size: 0.92rem;
+      color: #0c4a6e;
+    }
+
+    .callout-analogy strong {
+      color: #0369a1;
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.94rem;
+    }
+
+    /* Schematy procesowe (.process-flow) */
+    .process-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      margin: 12px 0;
+    }
+
+    .process-step {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: #1e293b;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      flex: 1 1 auto;
+      min-width: 130px;
+      text-align: center;
+    }
+
+    .process-arrow {
+      color: var(--primary);
+      font-weight: 900;
+      font-size: 1.15rem;
+      user-select: none;
+    }
+
+    /* Ramki ostrzegawcze (.callout-warning) */
+    .callout-warning {
+      background-color: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-left: 4px solid #e11d48;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      margin: 12px 0;
+      font-size: 0.92rem;
+      color: #881337;
+    }
+
+    .callout-warning strong {
+      color: #be123c;
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.94rem;
+    }
+
+    /* Tabele syntetyczne (.comparison-table) */
+    .table-container {
+      overflow-x: auto;
+      margin: 14px 0;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      text-align: left;
+      background: #ffffff;
+    }
+
+    .comparison-table th {
+      background-color: #0f766e;
+      color: #ffffff;
+      padding: 10px 12px;
+      font-weight: 700;
+    }
+
+    .comparison-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      color: #1e293b;
+      vertical-align: top;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .comparison-table tr:hover {
+      background-color: #f1f5f9;
+    }
+
+    /* Interaktywne sekcje sprawdzające (<details.self-check>) */
+    details.self-check {
+      background: #f8fafc;
+      border: 1px dashed #0f766e;
+      border-radius: var(--radius-sm);
+      margin-top: 16px;
+      padding: 10px 14px;
+    }
+
+    details.self-check[open] {
+      background: #f0fdf4;
+      border: 1px solid #16a34a;
+    }
+
+    summary.self-check-trigger {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: #0f766e;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .self-check-badge {
+      font-size: 0.76rem;
+      background: #ccfbf1;
+      color: #0f766e;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    details[open] .self-check-badge {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .self-check-content {
+      padding-top: 10px;
+      margin-top: 8px;
+      border-top: 1px solid #d1fae5;
+      font-size: 0.88rem;
+      color: #14532d;
+    }
+
+    .academic-def {
+      font-size: 0.92rem;
+      color: #1e293b;
+      margin: 8px 0;
+    }
+
+    .academic-def ul {
+      margin-left: 20px;
+      margin-top: 6px;
+    }
+
+    .academic-def li {
+      margin-bottom: 4px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 0.85rem;
+      color: #64748b;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO HEADER -->
+  <header class="hero">
+    <h1>Patofizjologia Układu Ruchowego</h1>
+    <p>Kompleksowe, interaktywne repetytorium akademickie Q&amp;A: płytka nerwowo-mięśniowa, miopatie, kanałopatie mięśniowe, układ piramidowy i stwardnienie rozsiane, zespół pozapiramidowy, móżdżek oraz narząd równowagi.</p>
+    <div class="badge-bar">
+      <span class="badge">Metoda Feynmana</span>
+      <span class="badge">Pełna interaktywność (zwijanie Q&amp;A)</span>
+      <span class="badge">Czyste oznaczenia bez ${...}</span>
+      <span class="badge">Złote pułapki egzaminacyjne</span>
+    </div>
+  </header>
+
+  <!-- PASEK NARZĘDZI: ROZWIŃ / ZWIŃ / SZUKAJ -->
+  <div class="toolbar-sticky">
+    <div class="action-buttons">
+      <button class="btn" onclick="toggleAllCards(true)">📂 Rozwiń wszystkie</button>
+      <button class="btn btn-secondary" onclick="toggleAllCards(false)">📁 Zwiń wszystkie</button>
+    </div>
+    <div class="search-box">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Szukaj pojęcia, objawu lub choroby..." oninput="filterCards()">
+    </div>
+  </div>
+
+  <!-- NAWIGACJA SZYBKIEGO SKOKU DO MODUŁÓW -->
+  <nav class="module-nav">
+    <div class="module-nav-title">Skocz do modułu:</div>
+    <div class="module-chips">
+      <a href="#modul-1" class="chip">1. Płytka nerwowo-mięśniowa</a>
+      <a href="#modul-2" class="chip">2. Miopatie i zaniki</a>
+      <a href="#modul-3" class="chip">3. Kanałopatie mięśniowe</a>
+      <a href="#modul-4" class="chip">4. Układ piramidowy &amp; SM</a>
+      <a href="#modul-5" class="chip">5. Układ pozapiramidowy</a>
+      <a href="#modul-6" class="chip">6. Móżdżek, pień i błędnik</a>
+    </div>
+  </nav>
+
+  <!-- ========================================================================= -->
+  <!-- MODUŁ 1: PŁYTKA NERWOWO-MIĘŚNIOWA -->
+  <!-- ========================================================================= -->
+  <div class="module-header" id="modul-1">
+    <h2>Część I: Zaburzenia Płytki Nerwowo-Mięśniowej (Pre- i Postsynaptyczne)</h2>
+    <span class="module-tag">Złącze nerwowo-mięśniowe</span>
+  </div>
+
+  <!-- PYTANIE 1: FIZJOLOGIA PŁYTKI -->
+  <details class="card-qa" open>
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 1</span>
+        <span>Jaka jest sekwencja zdarzeń warunkująca prawidłowe przewodnictwo w złączu nerwowo-mięśniowym?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Depolaryzacja zakończenia presynaptycznego otwiera kanały wapniowe VGCC, a napływ Ca<sup>2+</sup> wyzwala egzocytozę acetylocholiny (ACh). ACh wiąże się z postsynaptycznymi receptorami nikotynowymi (nAChR), co wywołuje dokomórkowy napływ Na<sup>+</sup>, generuje potencjał płytki (EPP), a po przekroczeniu progu – potencjał czynnościowy włókna mięśniowego.
+      </div>
+
+      <span class="section-label">1. Intuicyjna analogia</span>
+      <div class="callout-analogy">
+        💡 <strong>Kurier i bramka z kodem PIN:</strong><br>
+        Motoneuron to kurier dostarczający paczki z listami (pęcherzyki z ACh). Aby otworzyć magazyn i wyrzucić listy na rampę, potrzebuje klucza (napływ jonów Ca<sup>2+</sup>). Listy wpadają do skrzynek pocztowych na ścianie mięśnia (receptory nAChR). Każdy odebrany list otwiera bramkę dla strumienia wody (napływ Na<sup>+</sup>). Gdy wpłynie dostatecznie dużo wody, włącza się dzwonek alarmowy (skurcz mięśnia). Sprzątacz (acetylocholinoesteraza – AChE) natychmiast niszczy stare listy, aby skrzynka była gotowa na następną dostawę.
+      </div>
+
+      <span class="section-label">2. Mechanizm krok po kroku</span>
+      <div class="process-flow">
+        <div class="process-step">Potencjał czynnościowy motoneuronu α</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Otwarcie kanałów Ca<sup>2+</sup> (VGCC typ P/Q)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Fuzja pęcherzyków (SNARE) &amp; Egzocytoza ACh</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Aktywacja receptorów nikotynowych nAChR</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Napływ Na<sup>+</sup> &amp; Potencjał płytki (EPP &gt; 15 mV)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Depolaryzacja kanalików T &amp; Skurcz</div>
+      </div>
+
+      <span class="section-label">3. Definicja akademicka</span>
+      <div class="academic-def">
+        <strong>Płytka nerwowo-mięśniowa (neuromuscular junction):</strong> wyspecjalizowana synapsa chemiczna łącząca zakończenie aksonu motoneuronu α z komórką mięśnia szkieletowego (sarkolemą). Błona postsynaptyczna tworzy fałdy łączące o gęstym upakowaniu receptorów nikotynowych typu mięśniowego (α<sub>2</sub>βγδ lub α<sub>2</sub>βεδ). Hydroliza ACh zachodzi z udziałem acetylocholinoesterazy (AChE) w czasie poniżej 1 milisekundy.
+      </div>
+
+      <span class="section-label">4. Pułapka egzaminacyjna</span>
+      <div class="callout-warning">
+        ⚠️ <strong>Pułapka: Potencjał płytki (EPP) to NIE jest jeszcze potencjał czynnościowy!</strong><br>
+        EPP (end-plate potential) jest potencjałem lokalnym, stopniowanym (brak zasady „wszystko albo nic”). Dopiero gdy zsumowany EPP zdepolaryzuje sąsiadującą elektrycznie sarkolemę powyżej progu, dochodzi do otwarcia potencjałozależnych kanałów sodowych (Na<sub>V</sub>1.4) i wyzwolenia pełnego potencjału czynnościowego rozchodzącego się w głąb kanalików T.
+      </div>
+
+      <details class="self-check">
+        <summary class="self-check-trigger">
+          <span>❓ Pytanie sprawdzające: Co wywoła farmakologiczna blokada AChE?</span>
+          <span class="self-check-badge">Kliknij, by sprawdzić</span>
+        </summary>
+        <div class="self-check-content">
+          Zablokowanie AChE (np. pestycydami fosforoorganicznymi lub gazami bojowymi) powoduje zalanie szczeliny przez acetylocholinę. Początkowo wzmaga to skurcz, ale przedłużająca się depolaryzacja wprowadza receptory w stan desensytyzacji, a kanały sodowe sarkolemy w stan trwałej inaktywacji, prowadząc do tzw. <strong>przełomu cholinergicznego</strong> i wiotkiego porażenia mięśni oddechowych.
+        </div>
+      </details>
+    </div>
+  </details>
+
+  <!-- PYTANIE 2: MIASTHENIA GRAVIS -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 2</span>
+        <span>Jaki jest patomechanizm, obraz kliniczny i charakterystyczny objaw w Miasthenia gravis?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Miasthenia gravis to autoimmunologiczna choroba złącza o charakterze postsynaptycznym. Autoprzeciwciała (anty-AChR u ok. 90%, anty-MuSK u ok. 10%) niszczą i blokują receptory nikotynowe. Kluczowy objaw to patologiczna nużliwość mięśni (apokamnoza), nasilająca się podczas wysiłku i pod koniec dnia.
+      </div>
+
+      <span class="section-label">1. Intuicyjna analogia</span>
+      <div class="callout-analogy">
+        💡 <strong>Wandal na stacji ładowania aut elektrycznych:</strong><br>
+        Prąd (ACh) płynie bez przeszkód z elektrowni, ale chuligan (autoprzeciwciała anty-AChR) zakleił gniazdka gumą i odciął 70% wtyczek na parkingu (niszczenie fałdów błony postsynaptycznej przez dopełniacz). Samochody początkowo ruszają na resztkach baterii, ale z każdym kolejnym kilometrem stają w miejscu (apokamnoza). Po nocnym postoju częściowo regenerują energię, by po 10 minutach jazdy znów zgasnąć.
+      </div>
+
+      <span class="section-label">2. Ciąg przyczynowo-skutkowy</span>
+      <div class="process-flow">
+        <div class="process-step">Produkcja IgG przeciw AChR (rola grasicy: przetrwały grasiczak / hiperplazja)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Aktywacja dopełniacza &amp; Lityczne niszczenie fałdów postsynaptycznych</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Endocytoza i degradacja receptorów AChR</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Spadek amplitudy EPP poniżej progu wyładowania</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Wypadanie jednostek motorycznych podczas serii skurczów (Dekrement)</div>
+      </div>
+
+      <span class="section-label">3. Definicja i korelacje kliniczne</span>
+      <div class="academic-def">
+        <strong>Apokamnoza (nużliwość mięśniowa):</strong> spadek siły skurczu mięśni poprzecznie prążkowanych w miarę wykonywania powtarzanego wysiłku, ustępujący po odpoczynku.<br>
+        <strong>Objawy kliniczne:</strong>
+        <ul>
+          <li>Opadanie powiek (ptosis) i podwójne widzenie (diplopia) – mięśnie gałkoruchowe są wyjątkowo wrażliwe z uwagi na małe jednostki ruchowe i wysoką częstość wyładowań.</li>
+          <li>„Uśmiech Giocondy” (uśmiech poprzeczny) – osłabienie mięśni mimicznych twarzy (kąciki ust nie unoszą się, lecz rozciągają poprzecznie).</li>
+          <li>Opadanie żuchwy, dyzartria, dysfagia, osłabienie mięśni karku.</li>
+          <li>Osłabienie mięśni proksymalnych obręczy barkowej i biodrowej.</li>
+          <li>Przełom miasteniczny: zajęcie przepony i mięśni międzyżebrowych wywołujące ostrą niewydolność oddechową.</li>
+        </ul>
+      </div>
+
+      <span class="section-label">4. Pułapka egzaminacyjna</span>
+      <div class="callout-warning">
+        ⚠️ <strong>Próba elektrostymulacyjna (RNS): DEKREMENT, a nie inkrement!</strong><br>
+        W miastenii powtarzana stymulacja nerwu z niską częstotliwością (2–3 Hz) powoduje fizjologiczny spadek wyrzutu ACh. Przy zredukowanej liczbie receptorów postsynaptycznych potencjał EPP spada poniżej progu pobudzenia, co w zapisie EMG daje stopniowy spadek amplitudy odpowiedzi (dekrement miasteniczny &gt; 10%). W miastenii odruchy ścięgniste są ZACHOWANE, a źrenice reagują prawidłowo (brak zajęcia układu autonomicznego!).
+      </div>
+
+      <details class="self-check">
+        <summary class="self-check-trigger">
+          <span>❓ Pytanie sprawdzające: Jak odróżnić przełom miasteniczny od cholinergicznego?</span>
+          <span class="self-check-badge">Kliknij, by sprawdzić</span>
+        </summary>
+        <div class="self-check-content">
+          Wykonuje się test z ultrakrótko działającym inhibitorem AChE (chlorek edrofonium – Tensilon): jeśli siła mięśniowa natychmiast rośnie, to przełom miasteniczny (zbyt mało ACh). Jeśli objawy się nasilają lub pojawiają się fascykulacje, zlewne poty, zwężenie źrenic i bradykardia – to przełom cholinergiczny (przedawkowanie leków).
+        </div>
+      </details>
+    </div>
+  </details>
+
+  <!-- PYTANIE 3: ZESPÓŁ LAMBERTA-EATONA -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 3</span>
+        <span>Na czym polega zespół miasteniczny Lamberta-Eatona (LEMS) i dlaczego w tej chorobie siła rośnie po rozgrzewce?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> LEMS to presynaptyczna choroba autoimmunologiczna (często zespół paraneoplastyczny w raku drobnokomórkowym płuca), wywołana przeciwciałami anty-VGCC (przeciw potencjałozależnym kanałom wapniowym). Upośledza wyrzut acetylocholiny. W przeciwieństwie do miastenii: siła mięśniowa paradoksalnie ZWIĘKSZA SIĘ w trakcie wysiłku (zjawisko torowania / inkrementu).
+      </div>
+
+      <span class="section-label">1. Intuicyjna analogia</span>
+      <div class="callout-analogy">
+        💡 <strong>Zardzewiały kran z twardą wodą:</strong><br>
+        W miastenii zepsute było wiadro (odbiornik). W zespole Lamberta-Eatona zaciął się zawór w kranie (kanał wapniowy na presynapsie). Pojedyncze naciśnięcie daje zaledwie parę kropel wody – mięsień ledwo drgnie. Ale gdy szybko i rytmicznie pompujesz dźwignię (częste impulsy nerwowe), resztki wapnia nie nadążają uciekać z kolbki, kumulują się, aż w końcu ciśnienie rośnie i woda tryska pełnym strumieniem (inkrement – powrót siły po rozgrzewce!).
+      </div>
+
+      <span class="section-label">2. Ciąg przyczynowo-skutkowy</span>
+      <div class="process-flow">
+        <div class="process-step">Nowotwór (SCLC) wykazujący ekspresję antygenów VGCC</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Produkcja autoprzeciwciał anty-VGCC (typ P/Q)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Zablokowanie presynaptycznego dokomórkowego prądu Ca<sup>2+</sup></div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Drastyczny spadek wyjściowego uwalniania kwantów ACh</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Powtarzany skurcz ➔ Akumulacja Ca<sup>2+</sup> w kolbce ➔ Wzrost wyrzutu ACh (Torowanie)</div>
+      </div>
+
+      <span class="section-label">3. Obraz kliniczny</span>
+      <div class="academic-def">
+        <ul>
+          <li><strong>Zajęcie mięśni:</strong> głównie proksymalne mięśnie kończyn dolnych (trudności przy wstawaniu z fotela, chodzeniu po schodach).</li>
+          <li><strong>Mięśnie gałkoruchowe:</strong> zajęte <em>niezwykle rzadko</em> (kluczowa różnica kliniczna z miastenią!).</li>
+          <li><strong>Objawy autonomiczne (dysautonomia):</strong> suchość w ustach (suchość błon śluzowych), zaburzenia potencji, zaparcia, hipotonia ortostatyczna (kanały VGCC znajdują się także w neuronach autonomicznych).</li>
+          <li><strong>Odruchy ścięgniste:</strong> wyjściowo osłabione lub zniesione, ale <strong>powracają</strong> po kilkusekundowym napięciu izometrycznym.</li>
+        </ul>
+      </div>
+
+      <span class="section-label">4. Pułapka egzaminacyjna</span>
+      <div class="callout-warning">
+        ⚠️ <strong>Próba elektrostymulacyjna: INKREMENT (&gt; 100%)!</strong><br>
+        Podczas elektrostymulacji wysoką częstotliwością (20–50 Hz) lub bezpośrednio po 10-sekundowym maksymalnym skurczu dowolnym, amplituda potencjału CMAP gwałtownie rośnie (torowanie potężcowe). W miastenii mamy zawsze dekrement.
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 4: TABELA MG VS LEMS -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 4</span>
+        <span>Jak zestawić różnice kliniczne i patofizjologiczne między Miasthenia gravis a Zespołem Lamberta-Eatona?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Miastenia to choroba postsynaptyczna (anty-AChR), z zajęciem oczu i dekrementem w EMG. LEMS to presynaptyczny zespół paranowotworowy (anty-VGCC) z inkrementem, zajęciem kończyn dolnych i objawami wegetatywnymi.
+      </div>
+
+      <div class="table-container">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Cecha / Parametr</th>
+              <th>Miasthenia Gravis (MG)</th>
+              <th>Zespół Lamberta-Eatona (LEMS)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Lokalizacja defektu</strong></td>
+              <td>Postsynaptyczna (fałdy sarkolemy)</td>
+              <td>Presynaptyczna (kolbka aksonalna)</td>
+            </tr>
+            <tr>
+              <td><strong>Główny cel autoprzeciwciał</strong></td>
+              <td>Receptor nikotynowy AChR (90%), MuSK (10%)</td>
+              <td>Kanał wapniowy bramkowany napięciem (anty-VGCC typ P/Q)</td>
+            </tr>
+            <tr>
+              <td><strong>Związek z nowotworami</strong></td>
+              <td>Grasiczak (thymoma u ~15%), hiperplazja grasicy (65%)</td>
+              <td>Rak drobnokomórkowy płuca (SCLC, &gt; 50%)</td>
+            </tr>
+            <tr>
+              <td><strong>Dynamika męczliwości</strong></td>
+              <td>Siła spada wraz z wysiłkiem (apokamnoza)</td>
+              <td>Siła rośnie po kilku sekundach wysiłku (rozgrzewka)</td>
+            </tr>
+            <tr>
+              <td><strong>Zajęcie mięśni ocznych</strong></td>
+              <td>Bardzo częste i wczesne (ptoza, diplopia)</td>
+              <td>Rzadkie, słabo wyrażone</td>
+            </tr>
+            <tr>
+              <td><strong>Układ autonomiczny</strong></td>
+              <td>Nienaruszony (brak objawów wegetatywnych)</td>
+              <td>Zajęty (suchość w jamie ustnej, zaparcia, impotencja)</td>
+            </tr>
+            <tr>
+              <td><strong>Odruchy ścięgniste</strong></td>
+              <td>Prawidłowe</td>
+              <td>Zniesione/osłabione (wzrastają po wysiłku)</td>
+            </tr>
+            <tr>
+              <td><strong>Odpowiedź w próbie RNS</strong></td>
+              <td>Dekrement (spadek amplitudy przy 3 Hz)</td>
+              <td>Torowanie / Inkrement (wzrost amplitudy przy 20–50 Hz)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 5: TOKSYNA BOTULINOWA -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 5</span>
+        <span>Jaki jest mechanizm działania toksyny botulinowej i dlaczego wywołuje ona zstępujące porażenie wiotkie?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Toksyna botulinowa (botulina) selektywnie blokuje uwalnianie acetylocholiny na poziomie presynaptycznym. Jej łańcuch lekki jest cynkową endoproteazą, która trawi białka kompleksu SNARE (SNAP-25, synaptobrewinę, syntaksynę), uniemożliwiając fuzję pęcherzyków z błoną. Skutkiem jest porażenie wiotkie i dysautonomia cholinolityczna.
+      </div>
+
+      <span class="section-label">1. Intuicyjna analogia</span>
+      <div class="callout-analogy">
+        💡 <strong>Przecięcie cum na przystani promowej:</strong><br>
+        Pęcherzyk z acetylocholiną to prom, który musi dobić do brzegu i zacumować za pomocą potrójnej liny stalowej (kompleks SNARE: synaptobrewina, SNAP-25, syntaksyna). Botulina działa jak nożyce do metalu – przecina te cumy. Prom dopływa do brzegu, ale nie potrafi się połączyć z nabrzeżem i nie może wyładować pasażerów (ACh nie trafia do szczeliny). Silnik mięśnia milknie – zapada całkowity bezwład (porażenie wiotkie).
+      </div>
+
+      <span class="section-label">2. Ciąg przyczynowo-skutkowy</span>
+      <div class="process-flow">
+        <div class="process-step">Wniknięcie toksyny (konserwa, zanieczyszczona rana, miód u niemowląt)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Endocytoza toksyny do zakończeń cholinergicznych (łańcuch ciężki)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Translokacja łańcucha lekkiego (cynkowa endoproteaza) do cytozolu</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Proteolityczny rozpad białek SNARE (SNAP-25, synaptobrewina, syntaksyna)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Zablokowanie egzocytozy ACh ➔ Porażenie wiotkie i blok przywspółczulny</div>
+      </div>
+
+      <span class="section-label">3. Obraz kliniczny i postacie</span>
+      <div class="academic-def">
+        <strong>Zatrucie jadem kiełbasianym (Clostridium botulinum):</strong>
+        <ul>
+          <li><strong>Postacie:</strong> pokarmowa (spożycie gotowej toksyny, np. weki, konserwy), przyranna (namnażanie laseczek w ranie beztlenowej), niemowlęca (kolonizacja jelita przez spory np. po spożyciu miodu u dzieci &lt; 1. r.ż. z powodu niedojrzałej mikroflory).</li>
+          <li><strong>Triada wczesnych objawów:</strong> suchość w ustach, rozszerzone i sztywne źrenice (mydriasis), podwójne widzenie (diplopia).</li>
+          <li><strong>Progresja:</strong> symetryczne, <strong>zstępujące porażenie wiotkie</strong> (rozpoczyna się od nerwów czaszkowych: opadanie powiek, dysfagia, dyzartria ➔ mięśnie karku ➔ kończyny ➔ mięśnie oddechowe).</li>
+          <li><strong>Objawy autonomiczne (cholinolityczne):</strong> porażenna niedrożność jelit, zaparcia, zatrzymanie moczu, suchość skóry.</li>
+        </ul>
+      </div>
+
+      <span class="section-label">4. Pułapka egzaminacyjna</span>
+      <div class="callout-warning">
+        ⚠️ <strong>Porażenie wiotkie ZSTĘPUJĄCE, zachowany stan świadomości!</strong><br>
+        W botulizmie niedowład zstępuje (od głowy w dół do kończyn), w odróżnieniu od zespołu Guillaina-Barrégo (gdzie niedowład wstępuje – od stóp w górę). Toksyna botulinowa nie przekracza bariery krew-mózg – pacjent jest w pełni przytomny, dusząc się przy zachowanej pełnej świadomości!
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 6: TOKSYNA TĘŻCOWA -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 6</span>
+        <span>Dlaczego toksyna tężcowa wywołuje skurcz spastyczny, skoro ma podobną budowę do botuliny?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Tetanospazmina (wytwarzana przez <em>Clostridium tetani</em>) wędruje wstecznym transportem aksonalnym do rdzenia kręgowego i pnia mózgu, gdzie wnika do interneuronów hamujących (komórek Renshawa) i blokuje wydzielanie GABA oraz glicyny. Pozbawione hamowania motoneurony α wysyłają lawinę impulsów, wywołując uogólniony skurcz spastyczny.
+      </div>
+
+      <span class="section-label">1. Intuicyjna analogia</span>
+      <div class="callout-analogy">
+        💡 <strong>Przecięcie przewodów hamulcowych w rozpędzonym aucie:</strong><br>
+        Motoneuron to silnik, który ma wrodzoną skłonność do ciągłego gazowania. Interneurony hamujące (komórki Renshawa uwalniające glicynę i GABA) to klocki hamulcowe trzymające go w ryzach. Toksyna tężcowa nie niszczy samego silnika na obwodzie, lecz wspina się kablem w głąb centrali i odcina przewody hamulcowe. Pozbawiony hamulców silnik wchodzi na maksymalne obroty – mięśnie prężą się w niepohamowanym, bolesnym skurczu spastycznym.
+      </div>
+
+      <span class="section-label">2. Ciąg przyczynowo-skutkowy</span>
+      <div class="process-flow">
+        <div class="process-step">Wniknięcie zarodników C. tetani do głębokiej rany beztlenowej</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Uwalnianie tetanospazminy &amp; Wiązanie na płytce ruchowej</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Wsteczny transport aksonalny do rogów przednich rdzenia kręgowego</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Przejście do interneuronów Renshawa</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Łańcuch lekki trawi synaptobrewinę (VAMP) ➔ Blok wyrzutu GABA i glicyny</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Odhamowanie motoneuronów α ➔ Szczękościsk, napady prężeń, opisthotonus</div>
+      </div>
+
+      <span class="section-label">3. Obraz kliniczny</span>
+      <div class="academic-def">
+        <ul>
+          <li><strong>Szczękościsk (trismus):</strong> skurcz mięśni żwaczy – najwcześniejszy i osiowy objaw.</li>
+          <li><strong>Uśmiech sardoniczny (risus sardonicus):</strong> skurcz mięśni mimicznych twarzy z uniesieniem brwi i odsłonięciem zębów.</li>
+          <li><strong>Opisthotonus:</strong> łukowate wygięcie ciała w tył spowodowane przewagą silnych prostowników grzbietu nad zginaczami.</li>
+          <li><strong>Burza wegetatywna:</strong> odhamowanie układu współczulnego w pniu mózgu ➔ skoki ciśnienia tętniczego, tachykardia, zlewne poty i gorączka.</li>
+        </ul>
+      </div>
+
+      <span class="section-label">4. Pułapka egzaminacyjna</span>
+      <div class="callout-warning">
+        ⚠️ <strong>Pytanie-haczyk: Jaki jest wspólny substrat dla obu toksyn i skąd odmienny efekt?</strong><br>
+        Zarówno toksyna botulinowa, jak i tetanospazmina posiadają łańcuch lekki o aktywności endoproteazy cynkowej trawiącej <strong>synaptobrewinę (VAMP)</strong>. Różnica polega wyłącznie na <strong>miejscu docelowym</strong>: botulina działa <em>obwodowo</em> na synapsach cholinergicznych (brak ACh = wiotkość), natomiast tetanospazmina wędruje aksonem do OUN i działa <em>ośrodkowo</em> na synapsach hamujących glicynowych/GABA (brak hamowania = spastyczność)!
+      </div>
+    </div>
+  </details>
+
+  <!-- ========================================================================= -->
+  <!-- MODUŁ 2: MIOPATIE I CHOROBY ZANIKOWE -->
+  <!-- ========================================================================= -->
+  <div class="module-header" id="modul-2">
+    <h2>Część II: Miopatie i Choroby Zanikowe Mięśni</h2>
+    <span class="module-tag">Pierwotne i wtórne uszkodzenia mięśni</span>
+  </div>
+
+  <!-- PYTANIE 7: DYSTROFIA DUCHENNE'A -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 7</span>
+        <span>Jaki jest molekularny defekt w dystrofii mięśniowej Duchenne'a (DMD) i jakie wywołuje objawy kliniczne?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> DMD to recesywna choroba sprzężona z chromosomem X, spowodowana mutacją w genie <em>DMD</em> skutkującą całkowitym brakiem dystrofiny. Bez tego mechanicznego „amortyzatora” sarkolema ulega rozerwaniu podczas każdego skurczu, co wywołuje masywny napływ Ca<sup>2+</sup>, martwicę miocytów i ich zastępowanie tkanką łączną oraz tłuszczową (rzekomy przerost łydek, objaw Gowersa, skrajnie wysoka kinaza kreatynowa CK).
+      </div>
+
+      <span class="section-label">1. Intuicyjna analogia</span>
+      <div class="callout-analogy">
+        💡 <strong>Zerwany pas transmisyjny w wibrującej maszynie:</strong><br>
+        Włókienka kurczliwe (aktyna i miozyna) to potężny tłok silnika. Sarkolema to blaszana obudowa silnika. Dystrofina jest jak potężna stalowo-gumowa śruba i amortyzator, który łączy pracujący tłok z obudową i ramą pojazdu (macierzą zewnątrzkomórkową). Gdy nie ma dystrofiny, każde uderzenie tłoka dziurawi obudowę. Przez szczeliny do wnętrza wlewa się woda (Ca<sup>2+</sup>), wywołując korozję, zwarcie i pożar. Zniszczone części zastępuje piasek i szpachlówka (stłuszczenie i włóknienie).
+      </div>
+
+      <span class="section-label">2. Ciąg przyczynowo-skutkowy</span>
+      <div class="process-flow">
+        <div class="process-step">Mutacja genu dystrofiny (Xp21, delecja out-of-frame)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Całkowity brak dystrofiny na wewnętrznej powierzchni sarkolemy</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Mikrouszkodzenia błony podczas każdego skurczu</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Masywny napływ jonów Ca<sup>2+</sup> do cytozolu miocytu</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Aktywacja proteaz (kalpain) ➔ Martwica włókien mięśniowych</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Włóknienie i stłuszczenie mięśni (pseudohipertrofia) &amp; Wzrost CK</div>
+      </div>
+
+      <span class="section-label">3. Obraz kliniczny i diagnostyka</span>
+      <div class="academic-def">
+        <ul>
+          <li><strong>Kinaza kreatynowa (CK):</strong> podwyższona od urodzenia nawet 50–100-krotnie powyżej normy (świadectwo ciągłego rozpadu komórek mięśniowych).</li>
+          <li><strong>Objaw Gowersa:</strong> wstając z podłogi, dziecko „wspina się po własnych nogach” opierając ręce na kolanach i udach (wynika ze skrajnego osłabienia prostowników stawu biodrowego i mięśni obręczy miedniczej).</li>
+          <li><strong>Chód kaczkowaty:</strong> kołysanie biodrami na boki z powodu niewydolności mięśni pośladkowych średnich (objaw Trendelenburga).</li>
+          <li><strong>Rzekomy przerost łydek (pseudohypertrophia):</strong> łydki wyglądają na silnie umięśnione, ale włókna mięśniowe zostały zastąpione tkanką tłuszczową i łączną.</li>
+          <li>Zajęcie mięśnia sercowego (kardiomiopatia rozstrzeniowa) i oddechowego ➔ zgon najczęściej w 2.–3. dekadzie życia.</li>
+        </ul>
+      </div>
+
+      <span class="section-label">4. Pułapka egzaminacyjna</span>
+      <div class="callout-warning">
+        ⚠️ <strong>DMD vs Dystrofia Beckera (BMD):</strong><br>
+        W DMD mutacja przerywa ramkę odczytu (out-of-frame), przez co dystrofina jest <strong>całkowicie nieobecna</strong> (ciężki, wczesny przebieg). W łagodniejszej dystrofii Beckera ramka odczytu zostaje zachowana (in-frame), co daje nieprawidłową lub skróconą dystrofinę o <strong>częściowej funkcjonalności</strong> (początek objawów w wieku nastoletnim lub dorosłym).
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 8: SMA -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 8</span>
+        <span>Czym różni się rdzeniowy zanik mięśni (SMA) od pierwotnych dystrofii mięśniowych?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> SMA to choroba <em>neurogenna</em> (uszkodzenie motoneuronu), a nie pierwotnie mięśniowa! Spowodowana jest mutacją genu <em>SMN1</em> na chromosomie 5q, co prowadzi do obumierania neuronów rogów przednich rdzenia kręgowego. Pozbawione stymulacji włókna mięśniowe ulegają wtórnej atrofii odnerwiennej.
+      </div>
+
+      <span class="section-label">1. Intuicyjna analogia</span>
+      <div class="callout-analogy">
+        💡 <strong>Zwiędły ogród z powodu odcięcia rur nawadniających:</strong><br>
+        W dystrofii Duchenne'a chore były same rośliny (mięśnie). W SMA rośliny rodzą się idealnie zdrowe, ale robotnicy zniszczyli pompownię i rurociągi (motoneurony w rdzeniu). Woda nie dopływa – niepodlewane rośliny kurczą się, usychają i więdną (zanik odnerwienny).
+      </div>
+
+      <span class="section-label">2. Ciąg przyczynowo-skutkowy</span>
+      <div class="process-flow">
+        <div class="process-step">Homozygotyczna mutacja genu SMN1 (chr. 5q13)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Krytyczny niedobór białka SMN (Survival Motor Neuron)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Apoptoza motoneuronów α rogów przednich rdzenia kręgowego</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Odnerwienie (denerwacja) jednostek motorycznych</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Neurogenny zanik włókien mięśniowych (wiotkość, arefleksja)</div>
+      </div>
+
+      <span class="section-label">3. Cechy kliniczne</span>
+      <div class="academic-def">
+        <ul>
+          <li>Charakter niedowładu: <strong>symetryczny, wiotki, wstępujący</strong> (zaczyna się od kończyn dolnych i odcinków proksymalnych).</li>
+          <li>Odruchy ścięgniste: zniesione lub głęboko osłabione (hipo/arefleksja).</li>
+          <li>Brak zajęcia mięśni gałkoruchowych i zwieraczy, prawidłowy rozwój intelektualny.</li>
+          <li>Rola genu <em>SMN2</em>: gen „zapasowy” modyfikujący fenotyp – im więcej kopii <em>SMN2</em>, tym łagodniejszy przebieg kliniczny (więcej funkcjonalnego białka).</li>
+        </ul>
+      </div>
+
+      <span class="section-label">4. Pułapka egzaminacyjna</span>
+      <div class="callout-warning">
+        ⚠️ <strong>Biopsja mięśnia: Zaniki neurogenne vs miogenne:</strong><br>
+        W biopsji mięśnia w SMA widzimy zanik <strong>grupowy</strong> włókien (całe pęczki należące do jednego zmarłego motoneuronu zanikają obok prawidłowych pęczków – cecha denerwacji i reinerwacji). W dystrofiach zanik jest chaotyczny, rozproszony, z widoczną martwicą pojedynczych włókien i rozrostem tkanki łącznej.
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 9: PM VS DM -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 9</span>
+        <span>Jak odróżnić zapalenie wielomięśniowe (PM) od zapalenia skórno-mięśniowego (DM)?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Zapalenie wielomięśniowe (PM) to komórkowy atak limfocytów CD8<sup>+</sup> bez zmian skórnych. Zapalenie skórno-mięśniowe (DM) to mikroangiopatia zależna od autoprzeciwciał i dopełniacza, niszcząca naczynia śródmięśniowe (zanik okołopęczkowy), której towarzyszą objawy skórne: rumień heliotropowy, objaw Gottrona i objaw szala.
+      </div>
+
+      <div class="table-container">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Cecha</th>
+              <th>Zapalenie wielomięśniowe (PM)</th>
+              <th>Zapalenie skórno-mięśniowe (DM)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Immunopatogeneza</strong></td>
+              <td>Komórkowa: cytotoksyczne limfocyty CD8<sup>+</sup> naciekają włókna z ekspresją MHC-I</td>
+              <td>Humoralna: autoprzeciwciała, aktywacja dopełniacza C5b-9, mikroangiopatia naczyń</td>
+            </tr>
+            <tr>
+              <td><strong>Obraz w biopsji mięśnia</strong></td>
+              <td>Naciek zapalny wewnątrz pęczków (śródmięsna - <em>endomysium</em>)</td>
+              <td>Zanik okołopęczkowy (<em>perifascicular atrophy</em>) i nacieki w omięsnej (<em>perimysium</em>)</td>
+            </tr>
+            <tr>
+              <td><strong>Objawy skórne</strong></td>
+              <td><strong>BRAK</strong> zmian skórnych</td>
+              <td><strong>OBECNE:</strong> heliotrop, grudki Gottrona, objaw szala / dekoltu V, „ręce mechanika”</td>
+            </tr>
+            <tr>
+              <td><strong>Wiek zachorowania</strong></td>
+              <td>Prawie wyłącznie dorośli (&gt; 35. r.ż.)</td>
+              <td>Dwa szczyty: dzieci (5–14 lat) oraz dorośli (~40–50 lat)</td>
+            </tr>
+            <tr>
+              <td><strong>Zespół paraneoplastyczny</strong></td>
+              <td>Rzadziej</td>
+              <td>Bardzo często u dorosłych (związane z przeciwciałami anty-TIF1γ, anty-NXP2)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <span class="section-label">Charakterystyczne objawy skórne w Dermatomyositis</span>
+      <div class="academic-def">
+        <ul>
+          <li><strong>Rumień heliotropowy:</strong> fioletowo-liliowy obrzęk i rumień powiek (tzw. „okulary”).</li>
+          <li><strong>Grudki / Objaw Gottrona:</strong> rumieniowe, łuszczące się zgrubienia nad stawami międzypaliczkowymi i śródręczno-paliczkowymi rąk.</li>
+          <li><strong>Objaw szala i litery V:</strong> rumień skóry karku, barków (szal) oraz przedniej powierzchni klatki piersiowej (dekolt V).</li>
+        </ul>
+      </div>
+
+      <details class="self-check">
+        <summary class="self-check-trigger">
+          <span>❓ Pytanie sprawdzające: Jakie przeciwciało jest typowe dla zespołu antysyntetazowego?</span>
+          <span class="self-check-badge">Kliknij, by sprawdzić</span>
+        </summary>
+        <div class="self-check-content">
+          Przeciwciało <strong>anty-Jo-1</strong> (przeciw syntetazie histydylo-tRNA). Zespół ten charakteryzuje się zapaleniem mięśni, śródmiąższową chorobą płuc (ILD), zapaleniem stawów, objawem Raynauda i hiperkeratozą dłoni („ręce mechanika”).
+        </div>
+      </details>
+    </div>
+  </details>
+
+  <!-- ========================================================================= -->
+  <!-- MODUŁ 3: KANAŁOPATIE MIĘŚNIOWE -->
+  <!-- ========================================================================= -->
+  <div class="module-header" id="modul-3">
+    <h2>Część III: Kanałopatie Mięśni Poprzecznie Prążkowanych</h2>
+    <span class="module-tag">Elektrofizjologia sarkolemy</span>
+  </div>
+
+  <!-- PYTANIE 10: ISTOTA KANAŁOPATII -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 10</span>
+        <span>Czym są kanałopatie mięśniowe i jaka jest podstawowa reguła rządząca objawami: miotonia a porażenie wiotkie?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Kanałopatie to uwarunkowane genetycznie zaburzenia funkcji podjednostek kanałów jonowych (Na<sup>+</sup>, Cl<sup>−</sup>, Ca<sup>2+</sup>, K<sup>+</sup>) sarkolemy. Upośledzenie repolaryzacji lub nadmierna pobudliwość wywołuje <strong>miotonię</strong> (przetrwały skurcz/sztywność), natomiast trwała depolaryzacja inaktywująca kanały sodowe uniemożliwia pobudzenie, wywołując <strong>okresowe porażenie wiotkie</strong>.
+      </div>
+
+      <span class="section-label">1. Intuicyjna analogia</span>
+      <div class="callout-analogy">
+        💡 <strong>Zamek błyskawiczny w kurtce:</strong><br>
+        Kiedy zapinasz suwak (potencjał czynnościowy), ząbki natychmiast łączą się w całość. W zdrowym mięśniu po przejściu suwaka zamek łatwo się rozpina (repolaryzacja). W <em>miotonii</em> ząbki zacięły się na amen – chcesz puścić dłoń po uścisku, ale palce same trzymają dalej. W <em>porażeniu okresowym</em> cały suwak odpadł z kurtki – materiał rozłazi się całkowicie i nie da się go zapiąć za żadne skarby (wiotki bezwład).
+      </div>
+
+      <span class="section-label">2. Klasyfikacja kanałopatii</span>
+      <div class="table-container">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Kanał / Gen</th>
+              <th>Jednostka chorobowa</th>
+              <th>Typ dziedziczenia</th>
+              <th>Cechy kluczowe &amp; Czynniki wyzwalające</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Kanał sodowy</strong><br>Na<sub>V</sub>1.4 (<em>SCN4A</em>)</td>
+              <td><strong>Hiperkaliemiczne porażenie okresowe (HyperKPP)</strong></td>
+              <td>Autosomalnie dominujące (AD)</td>
+              <td>Upośledzona inaktywacja kanału ➔ przetrwała depolaryzacja. Napady wiotkości prowokowane odpoczynkiem po wysiłku i podaniem potasu (wysokie K<sup>+</sup> w osoczu).</td>
+            </tr>
+            <tr>
+              <td><strong>Kanał sodowy</strong><br>Na<sub>V</sub>1.4 (<em>SCN4A</em>)</td>
+              <td><strong>Paramiotonia wrodzona (Eulenburg)</strong></td>
+              <td>Autosomalnie dominujące (AD)</td>
+              <td>Sztywność miotoniczna wybitnie nasilana przez <strong>zimno</strong> oraz powtarzany wysiłek (tzw. miotonia paradoksalna!).</td>
+            </tr>
+            <tr>
+              <td><strong>Kanał chlorkowy</strong><br>ClC-1 (<em>CLCN1</em>)</td>
+              <td><strong>Miotonia wrodzona</strong><br>(Thomsen – AD, Becker – AR)</td>
+              <td>AD lub AR</td>
+              <td>Utrata przewodnictwa Cl<sup>−</sup> ➔ brak stabilizacji potencjału spoczynkowego kanalików T ➔ salwy wyładowań następczych. <strong>Zjawisko rozgrzewki (warm-up):</strong> ustępuje po rozruszaniu!</td>
+            </tr>
+            <tr>
+              <td><strong>Kanał potasowy</strong><br>Kir2.1 (<em>KCNJ2</em>)</td>
+              <td><strong>Zespół Andersena-Tawila</strong></td>
+              <td>Autosomalnie dominujące (AD)</td>
+              <td>Triada: napadowe osłabienie mięśni + wydłużenie odstępu QT i komorowe zaburzenia rytmu serca + cechy dysmorficzne (hipoplazja żuchwy, klinodaktylia).</td>
+            </tr>
+            <tr>
+              <td><strong>Kanał wapniowy</strong><br>Ca<sub>V</sub>1.1 (<em>CACNA1S</em>)</td>
+              <td><strong>Hipokaliemiczne porażenie okresowe (HypoKPP)</strong></td>
+              <td>Autosomalnie dominujące (AD)</td>
+              <td>Napady wiotkości w nocy/rano, spadek K<sup>+</sup> we krwi. Prowokowane bogatowęglowodanowym posiłkiem (wyrzut insuliny wpycha K<sup>+</sup> do komórek) i stresem.</td>
+            </tr>
+            <tr>
+              <td><strong>Receptor rianodynowy</strong><br>RyR1 (<em>RYR1</em>)</td>
+              <td><strong>Zespół hipertermii złośliwej (MH)</strong></td>
+              <td>Autosomalnie dominujące (AD)</td>
+              <td>Po anestetykach wziewnych lub sukcynylocholinie: masywny wypływ Ca<sup>2+</sup> z siateczki ➔ uogólniony skurcz, hipertermia, kwasica mleczanowa, rabdomioliza.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <span class="section-label">3. Pułapka egzaminacyjna</span>
+      <div class="callout-warning">
+        ⚠️ <strong>Miotonia wrodzona (kanał chlorkowy) vs Paramiotonia (kanał sodowy):</strong><br>
+        W miotonii wrodzonej (kanał Cl<sup>−</sup>) występuje <strong>zjawisko rozgrzewki (warm-up phenomenon)</strong>: pierwszy ruch po spoczynku jest trudny i sztywny, ale z każdym kolejnym zgięciem dłoni ruchomość się <em>poprawia</em>. W paramiotonii wrodzonej (kanał Na<sup>+</sup>) jest odwrotnie – mamy <strong>miotonię paradoksalną</strong>: każdy kolejny ruch lub ekspozycja na zimno coraz bardziej <em>usztywnia</em> mięsień!
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 11: HIPERTERMIA ZŁOŚLIWA -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 11</span>
+        <span>Jaki jest mechanizm zespołu hipertermii złośliwej (Malignant Hyperthermia) i jaki lek stanowi celowaną odtrutkę?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Mutacja genu receptora rianodynowego (<em>RYR1</em>) w siateczce sarkoplazmatycznej. Po kontakcie ze wziewnymi anestetykami halogenowymi (halotan, sewofluran) lub sukcynylocholiną dochodzi do niekontrolowanego wyrzutu jonów Ca<sup>2+</sup> do sarkoplazmy. Stały skurcz i maksymalna praca pomp SERCA zużywają ATP, wywołując hiperkapnię, sztywność mięśni, kwasicę i lawinowy wzrost temperatury (nawet &gt; 42°C). Odtrutka: <strong>dantrolen</strong>.
+      </div>
+
+      <span class="section-label">1. Mechanizm krok po kroku</span>
+      <div class="process-flow">
+        <div class="process-step">Ekspozycja na anestetyk halogenowy / sukcynylocholinę</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Trwałe otwarcie zmutowanego kanału RyR1 siateczki sarkoplazmatycznej</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Lawinowy wzrost stężenia Ca<sup>2+</sup> w cytozolu miocytu</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Ciągły skurcz mostków miozynowych &amp; Maksymalna aktywacja pomp SERCA</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Wyczerpanie ATP ➔ Gwałtowna produkcja ciepła, CO<sub>2</sub> i kwasu mlekowego</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Rabdomioliza, hiperkaliemia, arytmie komorowe i zgon bez leczenia</div>
+      </div>
+
+      <span class="section-label">2. Działanie Dantrolenu</span>
+      <div class="academic-def">
+        <strong>Dantrolen:</strong> swoisty bloker receptora rianodynowego (RyR1). Zamyka kanał rianodynowy, hamując uwalnianie Ca<sup>2+</sup> z cystern brzeżnych siateczki do sarkoplazmy, co natychmiast przerywa kaskadę hipermetabolizmu i skurczu mięśniowego.
+      </div>
+
+      <details class="self-check">
+        <summary class="self-check-trigger">
+          <span>❓ Pytanie sprawdzające: Jaki jest najwcześniejszy objaw hipertermii złośliwej na sali operacyjnej?</span>
+          <span class="self-check-badge">Kliknij, by sprawdzić</span>
+        </summary>
+        <div class="self-check-content">
+          Gwałtowny wzrost stężenia dwutlenku węgla w powietrzu końcowowydechowym (wzrost EtCO<sub>2</sub> w kapnografii), oporny na hiperwentylację, oraz skurcz mięśni żwaczy (masseter spasm) tuż po intubacji z użyciem sukcynylocholiny. Wzrost temperatury ciała jest objawem stosunkowo <em>późnym</em>!
+        </div>
+      </details>
+    </div>
+  </details>
+
+  <!-- ========================================================================= -->
+  <!-- MODUŁ 4: DROGI PIRAMIDOWE & STWARDNIENIE ROZSIANE -->
+  <!-- ========================================================================= -->
+  <div class="module-header" id="modul-4">
+    <h2>Część IV: Układ Piramidowy, Motoneurony i Stwardnienie Rozsiane</h2>
+    <span class="module-tag">Drogi zstępujące &amp; Demielinizacja</span>
+  </div>
+
+  <!-- PYTANIE 12: UMN VS LMN -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 12</span>
+        <span>Jak zróżnicować zespół uszkodzenia górnego neuronu ruchowego (UMN) od dolnego neuronu ruchowego (LMN)?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Uszkodzenie UMN (ośrodkowego) wywołuje <strong>niedowład spastyczny</strong>: wzmożone napięcie (objaw scyzoryka), wygórowane odruchy ścięgniste, obecność odruchów patologicznych (Babiński, Rossolimo) i brak pierwotnego zaniku. Uszkodzenie LMN (obwodowego) wywołuje <strong>niedowład wiotki</strong>: obniżenie/zniesienie napięcia, arefleksję, szybki zanik mięśni i fascykulacje („robaki pod skórą”).
+      </div>
+
+      <span class="section-label">1. Intuicyjna analogia</span>
+      <div class="callout-analogy">
+        💡 <strong>Generał w sztabie (UMN) i żołnierz na posterunku (LMN):</strong><br>
+        Dolny neuron (żołnierz) stoi z palcem na spuście i ma ochotę ciągle strzelać (odruch rdzeniowy). Górny neuron (generał w korze) nieustannie wydaje rozkazy tonujące i hamujące: „Spokój, nie strzelać bez komendy!”.<br>
+        • Jeśli <strong>zabijesz generała (uszkodzenie UMN)</strong>: żołnierz traci dyscyplinę, dostaje szału i strzela na każdy szelest (wygórowane odruchy, spastyczność, objaw Babińskiego).<br>
+        • Jeśli <strong>zabijesz żołnierza (uszkodzenie LMN)</strong>: na posterunku nie ma nikogo. Choćby generał krzyczał przez radio, z lufy nie padnie ani jeden strzał – mięsień leży bezwładny, wiotczeje i usycha (wiotkość, atrofia odnerwienna).
+      </div>
+
+      <div class="table-container">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Objaw / Cecha</th>
+              <th>Górny neuron ruchowy (UMN) – Zespół spastyczny</th>
+              <th>Dolny neuron ruchowy (LMN) – Zespół wiotki</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Lokalizacja uszkodzenia</strong></td>
+              <td>Kora ruchowa (komórki Betza), torebka wewnętrzna, pień, droga korowo-rdzeniowa</td>
+              <td>Rogi przednie rdzenia kręgowego, jądra ruchowe n. czaszkowych, korzenie, sploty, nerwy obwodowe</td>
+            </tr>
+            <tr>
+              <td><strong>Typ niedowładu</strong></td>
+              <td>Spastyczny (piramidowy)</td>
+              <td>Wiotki</td>
+            </tr>
+            <tr>
+              <td><strong>Napięcie mięśniowe</strong></td>
+              <td><strong>Wzmożone</strong> (spastyczność: opór zależny od prędkości, <strong>objaw scyzoryka</strong>)</td>
+              <td><strong>Obniżone lub zniesione</strong> (hipotonia / atonia)</td>
+            </tr>
+            <tr>
+              <td><strong>Odruchy ścięgniste (głębokie)</strong></td>
+              <td><strong>Wygórowane</strong> (hiperrefleksja), obecne klonusy (rząpie)</td>
+              <td><strong>Osłabione lub zniesione</strong> (hiporefleksja / arefleksja)</td>
+            </tr>
+            <tr>
+              <td><strong>Odruchy patologiczne</strong></td>
+              <td><strong>Obecne:</strong> objaw Babińskiego, objaw Rossolimo, Oppenheima</td>
+              <td><strong>Brak</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Odruchy powierzchowne</strong></td>
+              <td>Zniesione (np. brak odruchów brzusznych)</td>
+              <td>Zniesione (przerwanie łuku odruchowego)</td>
+            </tr>
+            <tr>
+              <td><strong>Zaniki mięśniowe</strong></td>
+              <td>Brak lub nieznaczne (wyłącznie z nieużywania – późne)</td>
+              <td><strong>Ciężkie, wczesne i postępujące zaniki</strong> (zanik odnerwienny)</td>
+            </tr>
+            <tr>
+              <td><strong>Fascykulacje (drżenia pęczkowe)</strong></td>
+              <td>Brak</td>
+              <td><strong>Obecne</strong> (nadwrażliwość odnerwieniowa włókien mięśniowych)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <span class="section-label">2. Pułapka egzaminacyjna</span>
+      <div class="callout-warning">
+        ⚠️ <strong>Objaw Babińskiego vs Objaw Rossolimo:</strong><br>
+        • <strong>Objaw Babińskiego:</strong> drażnienie skóry bocznego brzegu podeszwy powoduje <em>zgięcie grzbietowe (uniesienie) palucha</em> z jednoczesnym wachlarzowatym odwiedzeniem pozostałych palców (u dorosłego to ZAWSZE patologia UMN; u niemowląt do ok. 1.–2. r.ż. fizjologia z powodu braku dojrzałej mielinizacji).<br>
+        • <strong>Objaw Rossolimo:</strong> szybkie uderzenie młoteczkiem w opuszki palców stóp wywołuje ich gwałtowne <em>zgięcie podeszwowe</em>.
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 13: SLA -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 13</span>
+        <span>Dlaczego stwardnienie boczne zanikowe (SLA / ALS) daje jednocześnie objawy spastyczne i wiotkie?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> W SLA dochodzi do równoległej degeneracji <strong>zarówno górnego motoneuronu</strong> w korze ruchowej, <strong>jak i dolnego motoneuronu</strong> w rogach przednich rdzenia i pniu mózgu. Pacjent prezentuje paradoksalny obraz łączony: spastyczność i objaw Babińskiego przy jednoczesnych zanikach mięśni i fascykulacjach.
+      </div>
+
+      <span class="section-label">1. Mechanizmy molekularne w patogenezie SLA</span>
+      <div class="academic-def">
+        SLA jest śmiertelną chorobą neurodegeneracyjną (przeżycie średnio 3–5 lat, zgon z niewydolności oddechowej).
+        <ul>
+          <li><strong>Ekscytotoksyczność glutaminianu:</strong> upośledzenie astrocytarnego wychwytu glutaminianu (transporter EAAT2) ➔ nadmierna stymulacja receptorów NMDA i AMPA ➔ przeładowanie neuronów wapniem Ca<sup>2+</sup>.</li>
+          <li><strong>Stres oksydacyjny:</strong> mutacje genu dysmutazy ponadtlenkowej 1 (<em>SOD1</em>).</li>
+          <li><strong>Agregaty białkowe:</strong> patologiczna agregacja białka TDP-43 w cytoplazmie motoneuronów.</li>
+        </ul>
+      </div>
+
+      <span class="section-label">2. Obraz kliniczny</span>
+      <div class="callout-warning">
+        ⚠️ <strong>Złota reguła diagnostyczna SLA:</strong><br>
+        Obecność wygórowanych odruchów ścięgnistych i dodatniego objawu Babińskiego w <em>tej samej, ciężko zanikłej i wykazującej fascykulacje kończynie</em> jest patognomoniczna dla SLA. W SLA czucie, zwieracze i ruchy gałek ocznych pozostają niemal do końca nienaruszone!
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 14: STWARDNIENIE ROZSIANE -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 14</span>
+        <span>Jaki jest mechanizm zaburzeń przewodnictwa w stwardnieniu rozsianym (SM) oraz czym są objawy Lhermitte'a i Uhthoffa?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> SM to przewlekła choroba autoimmunologiczna OUN charakteryzująca się wieloogniskową demielinizacją i uszkodzeniem aksonów. Utrata mieliny niszczy przewodnictwo skokowe, prowadząc do spowolnienia lub bloku przewodzenia. Rozpoznanie opiera się na rozsianiu zmian w czasie i przestrzeni.
+      </div>
+
+      <span class="section-label">1. Intuicyjna analogia</span>
+      <div class="callout-analogy">
+        💡 <strong>Przetarta izolacja na podwodnym kablu światłowodowym:</strong><br>
+        Zdrowy akson to kabel w grubej gumowej otulinie (mielina tworzona przez oligodendrocyty OUN). Impuls nie musi biec po każdym milimetrze – skacze błyskawicznie od przewężenia do przewężenia Ranviera (przewodnictwo saltatoryjne). W SM układ odpornościowy zżera tę gumę. Prąd ucieka do otoczenia, sygnał gaśnie lub wlecze się żółwim tempem. Gdy w pokoju robi się cieplej, rezystancja rośnie i sygnał zanika całkowicie (objaw Uhthoffa).
+      </div>
+
+      <span class="section-label">2. Ciąg przyczynowo-skutkowy</span>
+      <div class="process-flow">
+        <div class="process-step">Przełamanie bariery krew-mózg przez autoreaktywne limfocyty T (Th1, Th17)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Atak zapalny na osłonki mielinowe i oligodendrocyty OUN</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Odsłonięcie aksonów &amp; Rozproszenie kanałów Na<sup>+</sup> z węzłów Ranviera</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Zanik przewodnictwa skokowego ➔ Spowolnienie lub blok przewodzenia</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Glioza (twarde blaszki stwardnieniowe) i wtórny zanik aksonalny</div>
+      </div>
+
+      <span class="section-label">3. Dwa kluczowe zjawiska kliniczne w SM</span>
+      <div class="academic-def">
+        <ul>
+          <li><strong>Objaw Uhthoffa:</strong> przejściowe, odwracalne pogorszenie widzenia lub nasilenie niedowładu pod wpływem <em>wzrostu temperatury ciała</em> (gorąca kąpiel, gorączka, intensywny wysiłek). Mechanizm: wyższa temperatura przyspiesza inaktywację kanałów sodowych, co w zdemielinizowanym włóknie obniża współczynnik bezpieczeństwa przewodzenia poniżej progu i wywołuje czynnościowy blok.</li>
+          <li><strong>Objaw Lhermitte’a:</strong> uczucie przebiegającego wzdłuż kręgosłupa „prądu elektrycznego”, promieniującego do rąk i nóg, wyzwalane przy <em>zgięciu głowy do przodu</em>. Mechanizm: mechanosensytyzacja zdemielinizowanych, zapalnie zmienionych włókien w sznurach tylnych rdzenia szyjnego.</li>
+        </ul>
+      </div>
+
+      <details class="self-check">
+        <summary class="self-check-trigger">
+          <span>❓ Pytanie sprawdzające: Co oznacza zasada rozsiania w czasie i przestrzeni?</span>
+          <span class="self-check-badge">Kliknij, by sprawdzić</span>
+        </summary>
+        <div class="self-check-content">
+          Rozsianie w przestrzeni (DIS) oznacza obecność zmian demielinizacyjnych w co najmniej dwóch odrębnych rejonach OUN (np. nerw wzrokowy, okołokomorowo, podkorowo, pień mózgu, rdzeń). Rozsianie w czasie (DIT) oznacza pojawienie się nowych zmian w różnym czasie (np. nowy rzut kliniczny lub jednoczesna obecność starych ognisk oraz nowych zmian wzmacniających się po podaniu kontrastu gadolinowego w rezonansie magnetycznym MRI).
+        </div>
+      </details>
+    </div>
+  </details>
+
+  <!-- ========================================================================= -->
+  <!-- MODUŁ 5: UKŁAD POZAPIRAMIDOWY -->
+  <!-- ========================================================================= -->
+  <div class="module-header" id="modul-5">
+    <h2>Część V: Patofizjologia Układu Pozapiramidowego</h2>
+    <span class="module-tag">Jądra podstawy: pętla bezpośrednia i pośrednia</span>
+  </div>
+
+  <!-- PYTANIE 15: PĘTLE JĄDER PODSTAWY -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 15</span>
+        <span>Jak jądra podstawy kontrolują ruch? Szlak bezpośredni vs szlak pośredni.</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Wzgórze ma naturalną tendencję do pobudzania kory ruchowej, ale jest stale tonicznie hamowane przez gałkę bladą wewnętrzną (GPi) i istotę czarną siatkowatą (SNr). <strong>Szlak bezpośredni</strong> zdejmuje to hamowanie (odhamowuje wzgórze ➔ <em>ułatwia wykonanie ruchu</em>). <strong>Szlak pośredni</strong> nasila hamowanie wzgórza poprzez jądro niskowzgórzowe Luysa ➔ <em>hamuje niepożądane ruchy</em>. Dopamina poprzez receptor D1 stymuluje szlak bezpośredni, a przez receptor D2 hamuje szlak pośredni – w obu przypadkach <strong>dopamina promuje ruch!</strong>
+      </div>
+
+      <span class="section-label">1. Intuicyjna analogia</span>
+      <div class="callout-analogy">
+        💡 <strong>Pedał gazu i hamulec ręczny:</strong><br>
+        Kora mózgowa chce ruszyć samochodem, ale wzgórze (rozrusznik) jest zaciśnięte wielkim hamulcem ręcznym (GPi/SNr).<br>
+        • <strong>Szlak bezpośredni to wciśnięcie gazu:</strong> zwalnia hamulec ręczny, auto rusza płynnie do przodu.<br>
+        • <strong>Szlak pośredni to hamulec bezpieczeństwa:</strong> dociska hamulec jeszcze mocniej, żeby auto nie zjechało z toru.<br>
+        • <strong>Dopamina to paliwo rakietowe:</strong> jednocześnie naciska pedał gazu (receptory D1) i odciąga nogę z hamulca (receptory D2). Bez dopaminy (ch. Parkinsona) stoisz z zaciągniętym hamulcem i nie możesz ruszyć z miejsca (bradykineza).
+      </div>
+
+      <div class="table-container">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Element szlaku</th>
+              <th>Szlak bezpośredni (pro-ruchowy)</th>
+              <th>Szlak pośredni (anty-ruchowy)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Receptor dopaminowy</strong></td>
+              <td><strong>D1</strong> (pobudzający, sprzężony z białkiem G<sub>αs</sub>)</td>
+              <td><strong>D2</strong> (hamujący, sprzężony z białkiem G<sub>αi</sub>)</td>
+            </tr>
+            <tr>
+              <td><strong>Sekwencja przekazywania</strong></td>
+              <td>Kora ➔ Prążkowie ➔ GPi/SNr (hamowanie GPi)</td>
+              <td>Kora ➔ Prążkowie ➔ GPe ➔ STN ➔ GPi/SNr (pobudzenie GPi)</td>
+            </tr>
+            <tr>
+              <td><strong>Wpływ na GPi/SNr</strong></td>
+              <td><strong>Hamuje</strong> GPi/SNr</td>
+              <td><strong>Pobudza</strong> GPi/SNr (za pośrednictwem STN)</td>
+            </tr>
+            <tr>
+              <td><strong>Końcowy efekt na wzgórze</strong></td>
+              <td><strong>Odhamowanie wzgórza</strong> (disinhibition) ➔ pobudzenie kory</td>
+              <td><strong>Nasilenie hamowania wzgórza</strong> ➔ wygaszenie ruchu</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 16: CHOROBA PARKINSONA -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 16</span>
+        <span>Jaki jest mechanizm i klasyczna triada objawów w chorobie Parkinsona?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Zwyrodnienie neuronów dopaminergicznych w części zbitej istoty czarnej (SNc) prowadzi do głębokiego niedoboru dopaminy w prążkowiu. Skutkiem jest przewaga szlaku pośredniego nad bezpośrednim, nadmierna aktywność jądra niskowzgórzowego i blokada wzgórza. Klasyczna triada: <strong>bradykineza, sztywność mięśniowa (koło zębate), drżenie spoczynkowe</strong>.
+      </div>
+
+      <span class="section-label">1. Mechanizm krok po kroku</span>
+      <div class="process-flow">
+        <div class="process-step">Zanikanie neuronów dopaminergicznych SNc (ciałka Lewy'ego: α-synukleina)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Spadek dopaminy w prążkowiu ➔ Względny nadmiar ACh i glutaminianu</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Osłabienie szlaku bezpośredniego + Odhamowanie szlaku pośredniego</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Nadaktywność jądra niskowzgórzowego (STN) i kompleksu GPi/SNr</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Masywne hamowanie GABA-ergiczne jąder wzgórza (VA/VL) ➔ Zespół hipokinetyczny</div>
+      </div>
+
+      <span class="section-label">2. Obraz kliniczny – Triada Osiowa</span>
+      <div class="academic-def">
+        <ul>
+          <li><strong>Bradykineza (spowolnienie ruchowe):</strong> trudność w inicjowaniu ruchów, mikrografia (drobnienie pisma), hipomimia („twarz maskowata”), cicha mowa (hipofonia).</li>
+          <li><strong>Sztywność mięśniowa (rigidity):</strong> wzmożone napięcie typu plastycznego („rura ołowiana”), po nałożeniu drżenia – <strong>objaw koła zębatego</strong> (skokowe ustępowanie oporu). Napięcie NIE zależy od prędkości ruchu biernego.</li>
+          <li><strong>Drżenie spoczynkowe (resting tremor):</strong> częstotliwość 4–6 Hz, przypomina „kręcenie pigułek” lub „liczenie monet”; zanika podczas ruchów celowych i w czasie snu głębokiego.</li>
+          <li><strong>Zaburzenia odruchów postawnych:</strong> pochylona sylwetka, chód drobnymi krokami z tendencją do przyspieszania (propulsja, retropulsja), brak fizjologicznego balansu rąk.</li>
+          <li><strong>Objawy wegetatywne:</strong> łojotok („twarz przetłuszczona”), ślinotok, zaparcia, hipotonia ortostatyczna. Początek choroby jest asymetryczny (jednostronny).</li>
+        </ul>
+      </div>
+
+      <span class="section-label">3. Pułapka egzaminacyjna</span>
+      <div class="callout-warning">
+        ⚠️ <strong>Sztywność pozapiramidowa (koło zębate) vs Spastyczność piramidowa (scyzoryk):</strong><br>
+        W spastyczności opór rośnie wraz z szybkością rozciągania i nagle ustępuje (objaw scyzoryka) – dotyczy wybiórczo zginaczy rąk i prostowników nóg. W chorobie Parkinsona sztywność jest <strong>jednostajna</strong> w całym zakresie ruchu, obejmuje jednocześnie zginacze i prostowniki („rura ołowiana”) i nie zależy od prędkości ruchu biernego!
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 17: CHOROBA HUNTINGTONA -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 17</span>
+        <span>Na czym polega genetyczny defekt i patofizjologia ruchów pląsawiczych w chorobie Huntingtona?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Dziedziczona autosomalnie dominująco mutacja dynamiczna: ekspansja powtórzeń trójki nukleotydowej CAG (&gt; 36) w genie <em>HTT</em> na chromosomie 4p. Prowadzi do wybiórczej degeneracji neuronów GABA-ergicznych i cholinergicznych prążkowia (głównie w jądrze ogoniastym). Skutkuje to załamaniem szlaku pośredniego, odhamowaniem wzgórza i wybuchem mimowolnych ruchów pląsawiczych (zespół hiperkinetyczno-hipotoniczny).
+      </div>
+
+      <span class="section-label">1. Mechanizm krok po kroku</span>
+      <div class="process-flow">
+        <div class="process-step">Ekspansja powtórzeń CAG w genie HTT ➔ Zmutowana huntingtyna</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Śmierć neuronów GABA/enkefalina prążkowia (głowa jądra ogoniastego)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Załamanie szlaku pośredniego ➔ Odhamowanie gałki bladej zewnętrznej (GPe)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Zahamowanie jądra niskowzgórzowego (STN) ➔ Brak pobudzenia GPi</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Całkowite odhamowanie wzgórza ➔ Niekontrolowane ruchy pląsawicze</div>
+      </div>
+
+      <span class="section-label">2. Obraz kliniczny i anatomopatologiczny</span>
+      <div class="academic-def">
+        <ul>
+          <li><strong>Ruchy pląsawicze (chorea):</strong> szybkie, mimowolne, nieregularne, „taneczne” ruchy kończyn, grymasy twarzy, wyrzucanie języka. Chory próbuje je maskować, nadając im pozór ruchów celowych.</li>
+          <li><strong>Napięcie mięśniowe:</strong> obniżone (hipotonia).</li>
+          <li><strong>Triada Huntingtona:</strong> ruchy pląsawicze + zaburzenia psychiczne (depresja, drażliwość, agresja) + postępujące otępienie podkorowe.</li>
+          <li><strong>Neuroobrazowanie (TK/MRI):</strong> uderzający zanik głów jąder ogoniastych skutkujący poszerzeniem rogów czołowych komór bocznych mózgu (obraz „uszu nietoperza”).</li>
+          <li><strong>Zjawisko antycypacji:</strong> w kolejnych pokoleniach (zwłaszcza przy dziedziczeniu po ojcu) liczba powtórzeń CAG rośnie, a choroba ujawnia się wcześniej i przebiega ciężej.</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 18: HEMIBALIZM & DYSTONIA -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 18</span>
+        <span>Jakie uszkodzenie w układzie pozapiramidowym wywołuje hemibalizm, a co jest istotą dystonii?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Hemibalizm powstaje w wyniku uszkodzenia <strong>jądra niskowzgórzowego (Luysa)</strong> przeciwstronnie do objawów (zwykle naczyniowy udar krwotoczny/niedokrwienny). Dystonia to współskurcz (ko-kontrakcja) mięśni agonistycznych i antagonistycznych, prowadzący do skręcających, utrwalonych ruchów i nienaturalnych pozycji ciała.
+      </div>
+
+      <span class="section-label">1. Mechanizm hemibalizmu</span>
+      <div class="academic-def">
+        Jądro niskowzgórzowe Luysa (STN) pobudza gałkę bladą wewnętrzną (GPi), która jest hamulcem wzgórza.
+        <div class="process-flow">
+          <div class="process-step">Udar jądra niskowzgórzowego (STN) po jednej stronie</div>
+          <div class="process-arrow">➔</div>
+          <div class="process-step">Utrata pobudzenia GPi</div>
+          <div class="process-arrow">➔</div>
+          <div class="process-step">Brak hamowania wzgórza</div>
+          <div class="process-arrow">➔</div>
+          <div class="process-step">Gwałtowne, zamaszyste ruchy wyrzutowe (Hemibalizm)</div>
+        </div>
+        <strong>Objaw:</strong> gwałtowne, zamaszyste, rotacyjne ruchy proksymalnych części kończyn jednej połowy ciała (kończyny „latają jak wiatrak”), ustępujące wyłącznie podczas snu głębokiego.
+      </div>
+
+      <span class="section-label">2. Dystonia – istota patofizjologiczna</span>
+      <div class="academic-def">
+        <strong>Dystonia:</strong> utrata hamowania wewnątrzkorowego i nieprawidłowa integracja sensoryczno-ruchowa w pętlach jądra podstawy. Skutkiem jest równoczesny skurcz mięśni zginaczy i prostowników (ko-kontrakcja).
+        <ul>
+          <li><strong>Dystonie ogniskowe:</strong> kurcz pisarski (dystonia zadaniowa występująca wyłącznie podczas pisania), kręcz karku (torticollis), kurcz powiek (blepharospasmus).</li>
+          <li>Ruchom często towarzyszy drżenie dystoniczne oraz tzw. <em>geste antagonistique</em> (sztuczka czuciowa – np. dotknięcie brody palcem znosi kręcz karku).</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 19: DRŻENIE SAMOISTNE -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 19</span>
+        <span>Co jest generatorem drżenia samoistnego (Essential Tremor) i jaki test farmakologiczny je łagodzi?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Drżenie samoistne wynika z nadaktywności pętli oscylacyjnej, której ośrodkowym generatorem jest <strong>dolne jądro oliwki</strong> w pniu mózgu (pętla oliwkowo-móżdżkowo-wzgórzowo-korowa). Jest to drżenie <strong>posturalno-kinetyczne</strong> (nasilane przy wyciągnięciu rąk i pisaniu), a charakterystyczną cechą jest jego spektakularne ustępowanie po <strong>niewielkiej ilości alkoholu</strong>.
+      </div>
+
+      <span class="section-label">Porównanie drżeń: Spoczynkowe vs Samoistne vs Zamiarowe</span>
+      <div class="table-container">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Typ drżenia</th>
+              <th>Częstotliwość</th>
+              <th>Główne występowanie</th>
+              <th>Lokalizacja patologii</th>
+              <th>Wpływ ruchu celowego</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Spoczynkowe (Parkinson)</strong></td>
+              <td>4–6 Hz</td>
+              <td>Kończyny w spoczynku, podparte</td>
+              <td>Istota czarna (niedobór dopaminy)</td>
+              <td><strong>Zanika</strong> podczas wykonywania ruchu</td>
+            </tr>
+            <tr>
+              <td><strong>Samoistne (Essential)</strong></td>
+              <td>5–10 Hz</td>
+              <td>Posturalne (utrzymanie pozycji) &amp; kinetyczne</td>
+              <td>Dolna oliwka / pętla móżdżkowa</td>
+              <td>Utrzymuje się podczas całego ruchu, spektakularna poprawa po etanolu</td>
+            </tr>
+            <tr>
+              <td><strong>Zamiarowe (Intencyjne)</strong></td>
+              <td>2–4 Hz</td>
+              <td>Koniec ruchu precyzyjnego</td>
+              <td>Półkule móżdżku</td>
+              <td><strong>Gwałtownie rośnie</strong> w miarę zbliżania się do celu (próba palec-nos)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+  <!-- ========================================================================= -->
+  <!-- MODUŁ 6: MÓŻDŻEK, PIEŃ MÓZGU I RÓWNOWAGA -->
+  <!-- ========================================================================= -->
+  <div class="module-header" id="modul-6">
+    <h2>Część VI: Móżdżek, Pień Mózgu i Narząd Równowagi</h2>
+    <span class="module-tag">Koordynacja, postawa i błędnik</span>
+  </div>
+
+  <!-- PYTANIE 20: ATAKSJA MÓŻDŻKOWA -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 20</span>
+        <span>Czym charakteryzuje się ataksja móżdżkowa i dlaczego uszkodzenie móżdżku daje objawy po tej samej stronie?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Ataksja to brak harmonijnej koordynacji ruchów bez obecności niedowładu. Móżdżek kontroluje ruch <strong>tożstronnie (ipsilateralnie)</strong> z powodu podwójnego skrzyżowania dróg nerwowych. Uszkodzenie półkuli objawia się dysmetrią, dysdiadochokinezą, mową skandowaną i chodem na szerokiej podstawie.
+      </div>
+
+      <span class="section-label">1. Zespół móżdżkowy – składowe objawowe</span>
+      <div class="academic-def">
+        <ul>
+          <li><strong>Dysmetria:</strong> niezdolność do prawidłowego wycelowania w punkt – chory przestrzeliwuje cel (hipermetria) lub zatrzymuje się przed nim (hipometria) w próbie palec-nos lub pięta-kolano.</li>
+          <li><strong>Dysdiadochokineza (adiadochokineza):</strong> niezdolność do wykonywania szybkich ruchów naprzemiennych (np. wkręcanie żarówek, naprzemienna pronacja i supinacja przedramion).</li>
+          <li><strong>Dyssynergia (asnergia):</strong> rozbicie płynnego, złożonego ruchu wielostawowego na odrębne, kanciaste etapy (dekompozycja ruchu).</li>
+          <li><strong>Mowa skandowana:</strong> spowolniona, rozczłonkowana na pojedyncze sylaby, wybuchowa (dyzartria ataktyczna).</li>
+          <li><strong>Titubacja:</strong> rytmiczne chwianie głowy i tułowia w pozycji stojącej lub siedzącej bez oparcia.</li>
+          <li><strong>Astazja-abazja:</strong> w ciężkim uszkodzeniu robaka móżdżku niemożność ustania na nogach i chodzenia, mimo zachowanej pełnej siły mięśni kończyn.</li>
+        </ul>
+      </div>
+
+      <span class="section-label">2. Pułapka egzaminacyjna</span>
+      <div class="callout-warning">
+        ⚠️ <strong>Próba Romberga: Ataksja móżdżkowa a ataksja czuciowa!</strong><br>
+        W ataksji móżdżkowej (uszkodzenie robaka) pacjent chwieje się na szerokiej podstawie ZARÓWNO przy oczach otwartych, jak i zamkniętych (kontrola wzroku nie jest w stanie skompensować błędu kalkulatora móżdżkowego). W ataksji czuciowej (uszkodzenie sznurów tylnych rdzenia) pacjent stoi stabilnie przy otwartych oczach, a przewraca się natychmiast po ich zamknięciu (<strong>dodatnia próba Romberga</strong>)!
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 21: SZTYWNOŚĆ ODMÓŻDŻENIOWA VS ODKOROWA -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 21</span>
+        <span>Gdzie leży linia uszkodzenia w sztywności odmóżdżeniowej (decerebrate) i czym różni się od sztywności odkorowej (decorticate)?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Anatomiczną granicą jest <strong>jądro czerwienne śródmózgowia</strong>.<br>
+        • <strong>Odkorowanie:</strong> uszkodzenie POWYŻEJ jądra czerwiennego (półkule/torebka). Ręce ZGIĘTE, nogi WYPROSTOWANE.<br>
+        • <strong>Odmóżdżenie:</strong> uszkodzenie PONIŻEJ jądra czerwiennego (pień mózgu między wzgórkami blaszki czworaczej a mostem). Wszystkie 4 kończyny w skrajnym WYPROŚCIE. Odmóżdżenie rokuje znacznie gorzej!
+      </div>
+
+      <span class="section-label">1. Mechanizm neurofizjologiczny</span>
+      <div class="process-flow">
+        <div class="process-step">Przerwanie pnia mózgu poniżej jądra czerwiennego (brak drogi czerwienno-rdzeniowej)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Utrata hamowania kory na twór siatkowaty mostu i jądra przedsionkowe</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Odhamowanie dróg przedsionkowo-rdzeniowych i siatkowato-rdzeniowych bocznych</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Permanentne pobudzenie motoneuronów α i γ mięśni prostowników</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Sztywność odmóżdżeniowa: uogólniony wyprost wszystkich 4 kończyn</div>
+      </div>
+
+      <div class="table-container">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Cecha</th>
+              <th>Sztywność odkorowa (Decorticate)</th>
+              <th>Sztywność odmóżdżeniowa (Decerebrate)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Poziom uszkodzenia</strong></td>
+              <td>Półkule mózgu, torebka wewnętrzna, wzgórze (<strong>powyżej</strong> jądra czerwiennego)</td>
+              <td>Śródmózgowie / most (<strong>poniżej</strong> jądra czerwiennego, powyżej jąder przedsionkowych)</td>
+            </tr>
+            <tr>
+              <td><strong>Kończyny górne</strong></td>
+              <td><strong>ZGIĘTE w łokciach i nadgarstkach</strong>, przywiedzione do klatki piersiowej</td>
+              <td><strong>WYPROSTOWANE</strong>, przywiedzione, nawrócone (pronacja), zaciśnięte pięści</td>
+            </tr>
+            <tr>
+              <td><strong>Kończyny dolne</strong></td>
+              <td>Wyprostowane, stopy w zgięciu podeszwowym</td>
+              <td><strong>Wyprostowane</strong>, stopy w zgięciu podeszwowym</td>
+            </tr>
+            <tr>
+              <td><strong>Skala Glasgow (GCS)</strong></td>
+              <td>3 punkty w odpowiedzi ruchowej (M3)</td>
+              <td>2 punkty w odpowiedzi ruchowej (M2 – bezpośrednie zagrożenie życia)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout-analogy">
+        💡 <strong>Mnemotechnika kliniczna:</strong><br>
+        • Od-<strong>KOROWANIE</strong>: Pacjent przyciska ręce do kory (do serca/klatki piersiowej) – ręce <strong>ZGIĘTE</strong>.<br>
+        • Od-<strong>MÓŻDŻENIE</strong>: Litera „E” w dec<strong>E</strong>brate jak <strong>E</strong>xtensor (prostownik) – wszystkie cztery kończyny maksymalnie <strong>WYPROSTOWANE</strong> jak struna.
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 22: OCZOPLĄS PATOLOGICZNY -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 22</span>
+        <span>Jaka jest patofizjologia faz oczopląsu i czym różni się oczopląs obwodowy od ośrodkowego?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Oczopląs to mimowolny, rytmiczny ruch gałek ocznych złożony z dwóch faz: <strong>fazy wolnej</strong> (patologiczny dryf wywołany asymetrią napięcia błędników lub pnia) oraz <strong>fazy szybkiej</strong> (naprawczy ruch nastawczy generowany przez korę/pień). <strong>Kierunek oczopląsu określa się zawsze według fazy szybkiej!</strong>
+      </div>
+
+      <div class="table-container">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Cecha</th>
+              <th>Oczopląs obwodowy (Błędnikowy)</th>
+              <th>Oczopląs ośrodkowy (Pień mózgu / Móżdżek)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Kierunek ruchu</strong></td>
+              <td>Poziomy z komponentą rotacyjną (nigdy czysto pionowy!)</td>
+              <td>W dowolnym kierunku, często <strong>czysto pionowy</strong> (w górę lub w dół)</td>
+            </tr>
+            <tr>
+              <td><strong>Wpływ fiksacji wzroku</strong></td>
+              <td><strong>Fiksacja tłumi</strong> oczopląs</td>
+              <td>Fiksacja <strong>nie tłumi</strong> lub nasila oczopląs</td>
+            </tr>
+            <tr>
+              <td><strong>Zawroty głowy</strong></td>
+              <td>Bardzo silne, wirowe (otoczenie wiruje), nudności, wymioty</td>
+              <td>Dyskretne, niepewność chodu, zaburzenia równowagi</td>
+            </tr>
+            <tr>
+              <td><strong>Objawy neurologiczne</strong></td>
+              <td>Szum w uszach, niedosłuch (brak objawów pniowych)</td>
+              <td>Obecne: ataksja, diplopia, dyzartria, niedowłady dróg długich</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <span class="section-label">Specjalne postacie oczopląsu</span>
+      <div class="academic-def">
+        <ul>
+          <li><strong>Oczopląs konwergencyjno-retrakcyjny:</strong> przy próbie spojrzenia w górę gałki oczne wykonują ruch zbieżny i cofają się w głąb oczodołu; objaw uszkodzenia pokrywy śródmózgowia (zespół Parinauda – np. szyszyniak).</li>
+          <li><strong>Oczopląs huśtawkowo-naprzemienny (see-saw):</strong> jedno oko unosi się z intorsją, podczas gdy drugie opada z ekstorsją; uszkodzenie w okolicy skrzyżowania wzrokowego i podwzgórza.</li>
+          <li><strong>Oczopląs okresowo-naprzemienny (PAN):</strong> poziomy oczopląs, który co 1–2 minuty samoczynnie odwraca kierunek fazy szybkiej; typowy dla uszkodzeń pnia w stwardnieniu rozsianym (SM) i malformacji Arnolda-Chiariego.</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <!-- PYTANIE 23: CHOROBA LOKOMOCYJNA -->
+  <details class="card-qa">
+    <summary class="card-summary-header">
+      <div class="q-title-wrap">
+        <span class="q-badge">Pytanie 23</span>
+        <span>Na czym polega teoria konfliktu sensorycznego w patofizjologii choroby lokomocyjnej (kinetozy)?</span>
+      </div>
+      <span class="accordion-indicator">▼</span>
+    </summary>
+    <div class="card-body">
+      <div class="quick-answer">
+        <strong>Zwięzła esencja:</strong> Choroba lokomocyjna powstaje w wyniku <strong>niezgodności sensorycznej (neural mismatch)</strong> pomiędzy sprzecznymi sygnałami docierającymi równocześnie do mózgu z trzech układów: narządu przedsionkowego (błędnika), wzroku oraz proprioceptorów. Pobudzenie jąder przedsionkowych aktywuje ośrodek wymiotny w pniu mózgu oraz układ autonomiczny.
+      </div>
+
+      <span class="section-label">1. Intuicyjna analogia</span>
+      <div class="callout-analogy">
+        💡 <strong>Mózg myśli, że zjadłeś trujące grzyby:</strong><br>
+        Kiedy czytasz książkę w jadącym autobusie: Twoje oczy patrzą na nieruchomą kartkę papieru i meldują mózgowi: „Stoisz w miejscu!”. Jednocześnie płyn w kanałach półkolistych i otolity w woreczku i łagiewce trzęsą się na zakrętach i krzyczą: „Rzucamy się z prędkością 80 km/h!”. W toku ewolucji taka potężna niezgodność sygnałów oznaczała jedno – neurotoksynę z trującego pokarmu halucynogennego. Mózg natychmiast uruchamia prastary mechanizm obronny: wyczyścić żołądek (mdłości i wymioty)!
+      </div>
+
+      <span class="section-label">2. Ciąg przyczynowo-skutkowy</span>
+      <div class="process-flow">
+        <div class="process-step">Przyspieszenie liniowe i kątowe podczas jazdy autem lub statkiem</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Wzrok melduje spoczynek ≠ Błędnik i czucie głębokie meldują ruch</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Konflikt w strukturach integracyjnych (jądra przedsionkowe, móżdżek)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Pobudzenie pola najdalszego (Area postrema – strefa chemoreceptorowa)</div>
+        <div class="process-arrow">➔</div>
+        <div class="process-step">Kaskada autonomiczna: nudności, wymioty, ślinotok, bladość, zimne poty</div>
+      </div>
+
+      <span class="section-label">3. Profilaktyka patofizjologiczna</span>
+      <div class="academic-def">
+        Aby wygasić kinetozę, należy <strong>zlikwidować konflikt sensoryczny</strong>: przenieść wzrok na linię horyzontu (wtedy oczy i błędnik meldują ten sam ruch) lub zamknąć oczy (usunięcie sprzecznego kanału wzrokowego). Farmakologicznie stosuje się leki blokujące receptory histaminowe H<sub>1</sub> (dimenhydrynat) lub muskarynowe M<sub>1</sub> (skopolamina) w pniu mózgu.
+      </div>
+    </div>
+  </details>
+
+</div>
+
+<footer>
+  <p><strong>Kompendium Patofizjologii Układu Ruchowego</strong> – Opracowanie akademickie oparte na wytycznych dydaktycznych i podręcznikach referencyjnych.</p>
+  <p>Interaktywny system pytań i odpowiedzi (Q&amp;A) • Dynamiczne zwijanie i wyszukiwanie • Czyste formatowanie medyczne.</p>
+</footer>
+
+<script>
+  // Funkcja rozwijania i zwijania wszystkich kart
+  function toggleAllCards(openState) {
+    const cards = document.querySelectorAll('details.card-qa');
+    cards.forEach(card => {
+      card.open = openState;
+    });
+  }
+
+  // Funkcja wyszukiwania na żywo
+  function filterCards() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toLowerCase().trim();
+    const cards = document.querySelectorAll('details.card-qa');
+
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      if (text.includes(filter)) {
+        card.style.display = '';
+        if (filter.length > 2) {
+          card.open = true; // Automatycznie rozwiń pasujące wyniki przy wyszukiwaniu
+        }
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
